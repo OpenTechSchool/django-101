@@ -68,23 +68,12 @@ musst du folgendes Kommando ausführen::
 
     $ python manage.py syncdb
     Creating tables ...
-    Creating table auth_permission
-    Creating table auth_group_permissions
-    Creating table auth_group
-    Creating table auth_user_user_permissions
-    Creating table auth_user_groups
-    Creating table auth_user
-    Creating table django_content_type
-    Creating table django_session
-    Creating table django_site
-    Creating table django_admin_log
     Creating table recipes_category
     Creating table recipes_recipe_category
     Creating table recipes_recipe
     Installing custom SQL ...
     Installing indexes ...
     Installed 0 object(s) from 0 fixture(s)
-
 
 Entwicklungs-Webserver starten
 ==============================
