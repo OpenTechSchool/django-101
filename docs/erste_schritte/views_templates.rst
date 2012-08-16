@@ -70,7 +70,7 @@ Die Datei :file:`urls.py` sieht danach so aus::
 
 Nun startest du den Entwicklungs-Webserver:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ python manage.py runserver
     Validating models...
@@ -95,7 +95,9 @@ erwartet. Mit Hilfe eines Context Objekts werden dann die Platzhalter im
 Template durch die gewünschten Werte ersetzt.
 
 Das erste Beispiel zeigt wie man ein Dictionary als Datenstruktur nutzen
-kann::
+kann
+
+.. code-block:: bash    
 
     $ python manage.py shell
 
@@ -198,7 +200,7 @@ Innerhalb der Applikation musst du auch zwei Verzeichnisse für die Templates
 anlegen, nämlich :file:`recipes/templates/recipes`. Darin erstellt du die
 Datei :file:`index.html`:
 
-..  code-block:: html+django
+.. code-block:: html+django
 
     {% extends "base.html" %}
 
@@ -215,7 +217,7 @@ Datei :file:`index.html`:
 
 Jetzt sollte deine Verzeichnisstruktur wie folgt aussehen:
 
-::
+.. code-block:: none
 
     cookbook
     |-- cookbook
@@ -294,7 +296,7 @@ Ein zweites Template erstellen
 Nun fehlt nur noch das zweite Template :file:`recipes/detail.html`. Lege es im
 gleichen Verzeichnis wie auch :file:`recipes/index.html` an:
 
-..  code-block:: html+django
+.. code-block:: html+django
 
     {% extends "base.html" %}
 
@@ -334,12 +336,16 @@ Maskierung von HTML und JavaScript
 
 Aus Sicherheitsgründen maskiert die Django Template Engine alles HTML und
 JavaScript, dass sich im Context befindet. Nehmen wir an, ein Benutzer schreibt in das
-Feld "Zubereitung" seines Rezepts folgenden Text::
+Feld "Zubereitung" seines Rezepts folgenden Text
+
+.. code-block:: html
 
     <script>alert('Das beste Rezept der Welt!')</script>
     Das Wasser im Topf auf 100°C erhitzen.
 
-Dann würde dieses HTML erzeugt::
+Dann würde dieses HTML erzeugt
+
+.. code-block:: html
 
     <p>&lt;script&gt;alert(&#39;Das beste Rezept der <Welt!&#39;)&lt;/script&gt;</p>
     <p>Das Wasser im Topf auf 100°C erhitzen.</p>
@@ -349,7 +355,7 @@ Der JavaScript Code würde also nicht ausgeführt werden.
 Es ist auch möglch, HTML Tags komplett zu entfernen. Dazu müsstest du im
 Template zusätzlich den ``striptags`` Filter einsetzen:
 
-..  code-block:: html+django
+.. code-block:: html+django
 
     {% block content %}
     <h2>{{ object.title }}</h2>
@@ -361,7 +367,9 @@ Template zusätzlich den ``striptags`` Filter einsetzen:
     <p>Zubereitungszeit: {{ object.time_for_preparation }} Minuten</p>
     {% endblock %}
 
-Jetzt sieht das HTML so aus::
+Jetzt sieht das HTML so aus
+
+.. code-block:: html
 
     <p>alert(&#39;Das beste Rezept der Welt!&#39;)</p>
     <p>Das Wasser im Topf auf 100°C erhitzen.</p>
@@ -370,7 +378,7 @@ Bist du dir dagegen sicher, dass HTML oder JavaScript gerendet und ggf.
 ausgeführt werden soll, kannst du den ``safe`` Filter benutzen, um dies
 explizit zu erlauben:
 
-..  code-block:: html+django
+.. code-block:: html+django
 
     {% block content %}
     <h2>{{ object.title }}</h2>
@@ -382,7 +390,9 @@ explizit zu erlauben:
     <p>Zubereitungszeit: {{ object.time_for_preparation }} Minuten</p>
     {% endblock %}
 
-Jetzt wird tatsächlich das JavaScript wie vom Benutzer gewünscht ausgeführt::
+Jetzt wird tatsächlich das JavaScript wie vom Benutzer gewünscht ausgeführt
+
+.. code-block:: html
 
     <p><script>alert('Das beste Rezept der Welt!')</script></p>
     <p>Das Wasser im Topf auf 100°C erhitzen.</p>

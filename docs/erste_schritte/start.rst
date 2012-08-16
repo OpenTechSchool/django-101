@@ -9,7 +9,7 @@ Ein Verzeichnis für alle Python Projekte
 
 Zuerst erstellst du ein Verzeichnis für dieses und alle zukünftigen Projekte:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ mkdir pythonprojects
 
@@ -23,21 +23,23 @@ also nennen wir das Projekt :file:`cookbook`.
 
 Wechsel nun in das neu erstellte Verzeichnis und erstelle ein Django Projekt:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ cd pythonprojects
     $ django-admin.py startproject cookbook
 
-..  note::
+.. note::
 
-    Unter Windows kann es nötig sein, dass den kompletten Pfad zu :file:`django-admin.py` angeben musst::
+    Unter Windows kann es nötig sein, dass den kompletten Pfad zu :file:`django-admin.py` angeben musst
+
+    .. code-block:: none
 
         C:\pythonprojects> python C:\virtualenvs\django-workshop\Scrips\django-admin.py startproject cookbook
 
 Dein neues Projekt wurde erstellt. Das Verzeichnis :file:`cookbook` enthält
 erstmal nicht viel:
 
-::
+.. code-block:: none
 
     cookbook # Projektverzeichnis
     |-- cookbook # Konfigurationsverzeichnis

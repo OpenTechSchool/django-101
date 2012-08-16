@@ -28,7 +28,7 @@ Die Applikation soll die Rezepte verwalten, also nennen wir sie
 Das Kommando legt ein Verzeichnis :file:`recipes` an, in dem sich vier Dateien
 befinden:
 
-::
+.. code-block:: bash
 
     recipes/
     |-- __init__.py

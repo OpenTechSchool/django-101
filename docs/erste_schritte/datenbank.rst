@@ -9,7 +9,7 @@ Datenmodel überprüfen
 
 Als erstes solltest du dein Datenmodel mit folgendem Kommando überprüfen:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ python manage.py validate
 
@@ -25,11 +25,11 @@ füllen.
 
 Mit dem folgenden Kommando kannst du dir die Queries ausgeben lassen:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ python manage.py sqlall recipes
 
-..  code-block:: sql
+.. code-block:: sql
 
     BEGIN;
     CREATE TABLE "recipes_category" (
@@ -64,7 +64,9 @@ Mit dem folgenden Kommando kannst du dir die Queries ausgeben lassen:
     COMMIT;
 
 Um diese Queries direkt auszuführen und so die Tabellen und Indizes anzulegen
-musst du folgendes Kommando ausführen::
+musst du folgendes Kommando ausführen
+
+.. code-block:: bash
 
     $ python manage.py syncdb
     Creating tables ...
@@ -80,7 +82,7 @@ Entwicklungs-Webserver starten
 
 Nachdem die Datenbank aktualisiert wurde kannst du nun wieder den Entwicklungs-Webserver starten:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ python manage.py runserver
     Validating models...
@@ -98,7 +100,9 @@ Export und Import von Daten mit Hilfe von JSON
 Damit man Daten zwischen verschiedenen Systemen austauschen kann gibt es in
 Django eingebaute Export- und Importfunktionen. Mit dem Kommando
 :program:`dumpdata` kannst du die eben erstellten Models aus der Applikation
-``recipes`` exportieren::
+``recipes`` exportieren
+
+.. code-block:: bash
 
     $ mkdir recipes/fixtures
     $ python manage.py dumpdata --indent 4 recipes > recipes/fixtures/initial_data.json
@@ -108,7 +112,9 @@ Django lädt die Fixtures aus einer Datei mit dem Namen
 gerade gespeicherten Daten werden also automatisch geladen wenn du die Models
 löscht und neu anlegst.
 
-Außerdem kannst du die Daten auch manuell mit dem Befehl :program:`loaddata` laden::
+Außerdem kannst du die Daten auch manuell mit dem Befehl :program:`loaddata` laden
+
+.. code-block:: bash
 
     $ python manage.py loaddata recipes/fixtures/initial_data.json
     Installed 4 object(s) from 1 fixture(s)

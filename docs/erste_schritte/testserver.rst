@@ -8,7 +8,7 @@ Den Entwicklungs-Webserver starten
 
 Zunächst starte Djangos Entwicklungs-Webserver:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ python manage.py runserver
     Validating models...
@@ -125,7 +125,9 @@ Kommentarzeichen in den Zeilen 5, 6 und 17. Danach sieht die Datei so aus::
 Datenbank synchronisieren
 -------------------------
 
-Django bringt bereits eine App zur Authentifizierung mit. Um die Datenbank entsprechend einzurichten, führe folgendes Kommando aus::
+Django bringt bereits eine App zur Authentifizierung mit. Um die Datenbank entsprechend einzurichten, führe folgendes Kommando aus
+
+.. code-block:: bash
 
     $ python manage.py syncdb
     Creating tables ...
@@ -158,7 +160,7 @@ Django bringt bereits eine App zur Authentifizierung mit. Um die Datenbank entsp
 
 Starte nun erneut den Entwicklungs-Webserver.
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ python manage.py runserver
     Validating models...

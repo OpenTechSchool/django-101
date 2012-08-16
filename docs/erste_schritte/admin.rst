@@ -12,7 +12,7 @@ Models dem Admin bekannt machen.
 Dazu muss die Datei :file:`admin.py` in der Applikation angelegt werden. Das
 Projekt sieht danach folgendermassen aus:
 
-::
+.. code-block:: none
 
     cookbook
     |-- cookbook
