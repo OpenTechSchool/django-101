@@ -156,7 +156,19 @@ Django bringt bereits eine App zur Authentifizierung mit. Um die Datenbank entsp
     Weil die in Django enthaltene App zur Authentifizierung zum ersten mal
     installiert wird, wird auch ein neuer Superuser angelegt.
 
-Die Admin-Applikation kann nun unter http://127.0.0.1:8000/admin/ erreicht werden. Die Zugangsdaten entsprechen denen des eben angeleten Superusers.
+Starte nun erneut den Entwicklungs-Webserver.
+
+..  code-block:: bash
+
+    $ python manage.py runserver
+    Validating models...
+
+    0 errors found
+    Django version 1.4, using settings 'cookbook.settings'
+    Development server is running at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+Die Admin-Applikation kann unter http://127.0.0.1:8000/admin/ erreicht werden. Die Zugangsdaten entsprechen denen des eben angeleten Superusers.
 
 Weiterführende Links zur Django Dokumentation
 =============================================
