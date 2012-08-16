@@ -20,7 +20,7 @@ Anlegen der Applikation
 Die Applikation soll die Rezepte verwalten, also nennen wir sie
 :file:`recipes`:
 
-..  code-block:: bash
+.. code-block:: bash
 
     $ cd cookbook
     $ python manage.py startapp recipes
@@ -29,6 +29,7 @@ Das Kommando legt ein Verzeichnis :file:`recipes` an, in dem sich vier Dateien
 befinden:
 
 ::
+
     recipes/
     |-- __init__.py
     |-- models.py
