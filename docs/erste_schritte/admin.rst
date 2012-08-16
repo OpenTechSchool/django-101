@@ -32,7 +32,6 @@ Danach öffnest du die Datei in deinem Editor und fügst die beiden folgenden
 Zeilen Code ein::
 
     from django.contrib import admin
-
     from .models import Category, Recipe
 
 Damit stehen dir der Admin und die Models der Applikation zur Verfügung.
@@ -76,7 +75,6 @@ Die Datei :file:`admin.py` sollte nun so aussehen (ab Python 2.6, für
 Python 2.5 muss wie oben erwähnt noch eine Zeile eingefügt werden)::
 
     from django.contrib import admin
-
     from .models import Category, Recipe
 
 
