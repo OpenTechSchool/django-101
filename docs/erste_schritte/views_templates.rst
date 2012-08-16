@@ -175,14 +175,9 @@ erstellt.
 Templates erstellen
 ===================
 
-Als erstes benötigst du ein Basis-Template für deine Website. Erstelle das
-Verzeichnis :file:`templates` im Projektverzeichnis. Das ist das Verzeichnis
-:file:`cookbook` mit der Datei :file:`manage.py` darin. Im neuen Verzeichnis
-erstellst du 
-
 Öffne die Datei :file:`base.html`: aus dem Verzeichnis :file:`templates` und ändere sie wie folgt ab: 
 
-..  code-block:: html+django
+.. code-block:: html+django
 
     <!doctype html>
     <html>
