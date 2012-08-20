@@ -15,5 +15,4 @@ Inhaltsverzeichnis:
 .. toctree::
    :maxdepth: 2
    
-   introduction
    preparation/index
