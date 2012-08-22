@@ -167,8 +167,8 @@ latex_font_size = '10pt'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'DjangoWorkshop.tex', u'Django Workshop Dokumentation',
-   u'Markus Zapke-Gründemann', 'manual', True),
+  ('index', 'Django-101.tex', u'Django 101 Tutorial',
+   u'OpenTechSchool', 'manual', True),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -200,8 +200,8 @@ latex_show_urls = 'footnote'
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'djangoworkshop', u'Django Workshop Documentation',
-     [u'Markus Zapke-Gründemann'], 1)
+    ('index', 'django-101', u'Django 101 Tutorial',
+     [u'OpenTechSchool'], 1)
 ]
 
 extlinks = {'djangodocs': ('https://docs.djangoproject.com/en/1.4/%s', None)}
