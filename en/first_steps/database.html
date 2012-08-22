@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Database &mdash; Django 101 Tutorial</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Django 101 Tutorial" href="../index.html" />
+    <link rel="up" title="Erste Schritte mit Django" href="index.html" />
+    <link rel="next" title="The first views" href="views_templates.html" />
+    <link rel="prev" title="The admin application" href="admin.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="views_templates.html" title="The first views"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="admin.html" title="The admin application"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Erste Schritte mit Django</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="database">
+<h1>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h1>
+<p>Now we want to update the database and and then start the development webserver,
+to fill the cookbook over the admin interface.</p>
+<div class="section" id="validate-the-data-model">
+<h2>Validate the data model<a class="headerlink" href="#validate-the-data-model" title="Permalink to this headline">¶</a></h2>
+<p>With the following command you can validate the your data model:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py validate
+</pre></div>
+</div>
+<p>Django generally checks the data model on all operations, which use models.
+This command allows you to explicitly check the validity of your model.</p>
+</div>
+<div class="section" id="synchronise-the-database">
+<h2>Synchronise the database<a class="headerlink" href="#synchronise-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The database is filled by SQL Queries. Django create those for you, but
+if you are interested whats going on the following command shows you
+the queries:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py sqlall recipes
+</pre></div>
+</div>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">BEGIN</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;recipes_category&quot;</span> <span class="p">(</span>
+    <span class="ss">&quot;id&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="ss">&quot;name&quot;</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;slug&quot;</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="ss">&quot;description&quot;</span> <span class="nb">text</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">)</span>
+<span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;recipes_recipe_category&quot;</span> <span class="p">(</span>
+    <span class="ss">&quot;id&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="ss">&quot;recipe_id&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;category_id&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">REFERENCES</span> <span class="ss">&quot;recipes_category&quot;</span> <span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">),</span>
+    <span class="k">UNIQUE</span> <span class="p">(</span><span class="ss">&quot;recipe_id&quot;</span><span class="p">,</span> <span class="ss">&quot;category_id&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;recipes_recipe&quot;</span> <span class="p">(</span>
+    <span class="ss">&quot;id&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="ss">&quot;title&quot;</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;slug&quot;</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="ss">&quot;ingredients&quot;</span> <span class="nb">text</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;preparation&quot;</span> <span class="nb">text</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;time_for_preparation&quot;</span> <span class="nb">integer</span><span class="p">,</span>
+    <span class="ss">&quot;number_of_portions&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;difficulty&quot;</span> <span class="nb">smallint</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;author_id&quot;</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">REFERENCES</span> <span class="ss">&quot;auth_user&quot;</span> <span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">),</span>
+    <span class="ss">&quot;date_created&quot;</span> <span class="n">datetime</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="ss">&quot;date_updated&quot;</span> <span class="n">datetime</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">)</span>
+<span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="ss">&quot;recipes_recipe_cc846901&quot;</span> <span class="k">ON</span> <span class="ss">&quot;recipes_recipe&quot;</span> <span class="p">(</span><span class="ss">&quot;author_id&quot;</span><span class="p">);</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To execute these queries and to create the tables and indices with it, you have
+to run the following command.:</p>
+<div class="highlight-python"><pre>$ python manage.py syncdb
+Creating tables ...
+Creating table auth_permission
+Creating table auth_group_permissions
+Creating table auth_group
+Creating table auth_user_user_permissions
+Creating table auth_user_groups
+Creating table auth_user
+Creating table django_content_type
+Creating table django_session
+Creating table django_site
+Creating table django_admin_log
+Creating table recipes_category
+Creating table recipes_recipe_category
+Creating table recipes_recipe
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)</pre>
+</div>
+</div>
+<div class="section" id="run-the-development-webserver">
+<h2>Run the development webserver<a class="headerlink" href="#run-the-development-webserver" title="Permalink to this headline">¶</a></h2>
+<p>After the database update you can start the development server again:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py runserver
+Validating models...
+
+0 errors found
+Django version 1.4, using settings <span class="s1">&#39;cookbook.settings&#39;</span>
+Development server is running at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+</pre></div>
+</div>
+<p>Under the URL <a class="reference external" href="http://127.0.0.1:8000/admin/recipes/">http://127.0.0.1:8000/admin/recipes/</a> you can now create some recipes.</p>
+</div>
+<div class="section" id="export-and-import-data-with-json">
+<h2>Export and import data with JSON<a class="headerlink" href="#export-and-import-data-with-json" title="Permalink to this headline">¶</a></h2>
+<p>Django supports an export and import functionality to allow an exchange
+of data between different systems. With the command <strong class="program">dumpdata</strong>
+you can export the models you created from the application <tt class="docutils literal"><span class="pre">recipes</span></tt>:</p>
+<div class="highlight-python"><pre>$ mkdir recipes/fixtures
+$ python manage.py dumpdata --indent 4 recipes &gt; recipes/fixtures/initial_data.json</pre>
+</div>
+<p>Django loads the fixtures from a file named <tt class="file docutils literal"><span class="pre">initial_data.json</span></tt> everytime
+when you run <strong class="program">syncdb</strong>. That means, that the data you just exported
+will be autimatically loaded when you delete or create models in the future.</p>
+<p>It is also possible to load data manually with the following command <strong class="program">loaddata</strong>:</p>
+<div class="highlight-python"><pre>$ python manage.py loaddata recipes/fixtures/initial_data.json
+Installed 4 object(s) from 1 fixture(s)</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong class="program">loaddata</strong> is not the very best solution to load data from different sources,
+because the fixture alway contain primary keys.
+There are different Apps, for example <a class="reference external" href="http://django-csv-importer.readthedocs.org/">CSV
+importer</a>, that is more suited for importing new data.</p>
+</div>
+</div>
+<div class="section" id="further-django-ressources">
+<h2>Further Django ressources<a class="headerlink" href="#further-django-ressources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.4/ref/django-admin/#ref-django-admin">information about django-admin.py and manage.py</a></li>
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.4/howto/initial-data/">Provide data for the creation of the models</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Database</a><ul>
+<li><a class="reference internal" href="#validate-the-data-model">Validate the data model</a></li>
+<li><a class="reference internal" href="#synchronise-the-database">Synchronise the database</a></li>
+<li><a class="reference internal" href="#run-the-development-webserver">Run the development webserver</a></li>
+<li><a class="reference internal" href="#export-and-import-data-with-json">Export and import data with JSON</a></li>
+<li><a class="reference internal" href="#further-django-ressources">Further Django ressources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="admin.html"
+                        title="previous chapter">The admin application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="views_templates.html"
+                        title="next chapter">The first views</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/first_steps/database.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="views_templates.html" title="The first views"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="admin.html" title="The admin application"
+             >previous</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" >Erste Schritte mit Django</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright .
+    <br />Dieses Werk ist unter einem <a href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland Lizenzvertrag</a> lizenziert.<br />
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
