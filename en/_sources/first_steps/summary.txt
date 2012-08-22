@@ -11,10 +11,9 @@ You learned the following things:
 
     * Create models
     * Activate the Admin-Application
-    * Extend URLConf 
+    * Extend URLConf
     * Create Views
     * Create Templates
 
 There is lots of more stuff to learn. In the next of this tutorial
-we will extend the application and increase the reusability of 
-the code.
+we will extend the application and increase the reusability of the code.

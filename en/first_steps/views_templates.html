@@ -54,7 +54,8 @@
             
   <div class="section" id="the-first-views">
 <h1>The first views<a class="headerlink" href="#the-first-views" title="Permalink to this headline">¶</a></h1>
-<p>Now that you&#8217;ve entered some data with the admin application, the next step is to show this data in the front-end. Therefore three things need to be done:</p>
+<p>Now that you&#8217;ve entered some data with the admin application, the next step
+is to show this data in the front-end. Therefore three things need to be done:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>define URLs</li>
@@ -64,7 +65,9 @@
 </div></blockquote>
 <div class="section" id="define-urls">
 <h2>Define URLs<a class="headerlink" href="#define-urls" title="Permalink to this headline">¶</a></h2>
-<p>First, define the URLs which route the request to the views. For now two URLs will be sufficient. Open the file <tt class="file docutils literal"><span class="pre">urls.py</span></tt> and append the following code to the <tt class="docutils literal"><span class="pre">urlpatterns</span></tt>:</p>
+<p>First, define the URLs which route the request to the views. For now two URLs
+will be sufficient. Open the file <tt class="file docutils literal"><span class="pre">urls.py</span></tt> and append the following
+code to the <tt class="docutils literal"><span class="pre">urlpatterns</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^recipes/(?P&lt;slug&gt;[-\w]+)/$&#39;</span><span class="p">,</span> <span class="s">&#39;recipes.views.detail&#39;</span><span class="p">),</span>
 <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="s">&#39;recipes.views.index&#39;</span><span class="p">),</span>
 </pre></div>
@@ -98,8 +101,13 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The <tt class="docutils literal"><span class="pre">url</span></tt> function&#8217;s first argument is a <a class="reference external" href="http://docs.python.org/reference/lexical_analysis.html#string-literals">raw string</a> containing a regular expression.</p>
-<p class="last">If you are not familiar with regular expressions you can read more in the <a class="reference external" href="http://docs.python.org/howto/regex.html">Regular-Expression-HOWTO</a>, on <a class="reference external" href="http://www.regular-expressions.info/">Regular-Expressions.info</a> or in an article from Doug Hellmann about the <a class="reference external" href="http://www.doughellmann.com/PyMOTW/re/">re-module</a> erfahren. At <a class="reference external" href="http://www.regexplanet.com/advanced/python/index.html">RegexPlanet</a> you can test regular expressions directly in the browser.</p>
+<p>The <tt class="docutils literal"><span class="pre">url</span></tt> function&#8217;s first argument is a
+<a class="reference external" href="http://docs.python.org/reference/lexical_analysis.html#string-literals">raw string</a>
+containing a regular expression.</p>
+<p class="last">If you are not familiar with regular expressions you can read more in the
+<a class="reference external" href="http://docs.python.org/howto/regex.html">Regular-Expression-HOWTO</a>, on <a class="reference external" href="http://www.regular-expressions.info/">Regular-Expressions.info</a> or in an article
+from Doug Hellmann about the <a class="reference external" href="http://www.doughellmann.com/PyMOTW/re/">re-module</a> erfahren. At <a class="reference external" href="http://www.regexplanet.com/advanced/python/index.html">RegexPlanet</a> you can
+test regular expressions directly in the browser.</p>
 </div>
 <p>Now start the development server:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py runserver
@@ -117,14 +125,17 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 <div class="section" id="how-a-template-gets-rendered">
 <h2>How a template gets rendered<a class="headerlink" href="#how-a-template-gets-rendered" title="Permalink to this headline">¶</a></h2>
 <p>Before we write the first views we&#8217;ll look at how Django renders templates.</p>
-<p>Django templates are normal Python objects whose constructor expects a string. The placeholders are replaced with the values from a context object.</p>
+<p>Django templates are normal Python objects whose constructor expects a string.
+The placeholders are replaced with the values from a context object.</p>
 <p>The first example shows how a dictionary can be used as data structure</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py shell
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The command <strong class="program">shell</strong> loads the configurations from <tt class="file docutils literal"><span class="pre">settings.py</span></tt> of the current project. The normal Python interpreter wouldn&#8217;t do that.</p>
+<p class="last">The command <strong class="program">shell</strong> loads the configurations from
+<tt class="file docutils literal"><span class="pre">settings.py</span></tt> of the current project. The normal Python interpreter
+wouldn&#8217;t do that.</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">Template</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s">&#39;My name is {{ person.first_name }}.&#39;</span><span class="p">)</span>
@@ -153,9 +164,12 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 </div>
 <div class="section" id="create-the-first-view">
 <h2>Create the first view<a class="headerlink" href="#create-the-first-view" title="Permalink to this headline">¶</a></h2>
-<p>Now we have to create the views. They will use the ORM to get the data from the database.</p>
-<p>Open the file <tt class="file docutils literal"><span class="pre">views.py</span></tt> in the <tt class="docutils literal"><span class="pre">recipes</span></tt> application which you have created with the command <strong class="command">startapp recipes</strong>.</p>
-<p>Most views return a <tt class="docutils literal"><span class="pre">HttpResponse</span></tt> object, so we write a really simple view which does exactly this:</p>
+<p>Now we have to create the views. They will use the ORM to get the data from
+the database.</p>
+<p>Open the file <tt class="file docutils literal"><span class="pre">views.py</span></tt> in the <tt class="docutils literal"><span class="pre">recipes</span></tt> application which you have
+created with the command <strong class="command">startapp recipes</strong>.</p>
+<p>All views return a <tt class="docutils literal"><span class="pre">HttpResponse</span></tt> object, so we write a really simple view
+which does exactly this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
 
 
@@ -163,8 +177,11 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
     <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;My first view.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now open <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in the browser. You will see the string you passed to the <tt class="docutils literal"><span class="pre">HttpResponse</span></tt> object.</p>
-<p>Instead of the string, we&#8217;ll now load a <tt class="docutils literal"><span class="pre">Template</span></tt> and render it with a <tt class="docutils literal"><span class="pre">Context</span></tt> containing a <tt class="docutils literal"><span class="pre">Recipe</span></tt> object. The rendered string from the <tt class="docutils literal"><span class="pre">Template</span></tt> is passed to the <tt class="docutils literal"><span class="pre">HttpResponse</span></tt>:</p>
+<p>Now open <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in the browser. You will see the string you
+passed to the <tt class="docutils literal"><span class="pre">HttpResponse</span></tt> object.</p>
+<p>Instead of the string, we&#8217;ll now load a <tt class="docutils literal"><span class="pre">Template</span></tt> and render it with a
+<tt class="docutils literal"><span class="pre">Context</span></tt> containing a <tt class="docutils literal"><span class="pre">Recipe</span></tt> object. The rendered string from the
+<tt class="docutils literal"><span class="pre">Template</span></tt> is passed to the <tt class="docutils literal"><span class="pre">HttpResponse</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
 <span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">loader</span>
 
@@ -178,11 +195,13 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
     <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>When opening <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> you will see a <tt class="docutils literal"><span class="pre">TemplateDoesNotExist</span></tt> exception. It is raised because the template doesn&#8217;t exist yet.</p>
+<p>When opening <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> you will see a <tt class="docutils literal"><span class="pre">TemplateDoesNotExist</span></tt>
+exception. It is raised because the template doesn&#8217;t exist yet.</p>
 </div>
 <div class="section" id="create-the-list-template">
 <h2>Create the list template<a class="headerlink" href="#create-the-list-template" title="Permalink to this headline">¶</a></h2>
-<p>Open the file <tt class="file docutils literal"><span class="pre">base.html</span></tt> from the <tt class="file docutils literal"><span class="pre">templates</span></tt> folder and change it this way:</p>
+<p>Open the file <tt class="file docutils literal"><span class="pre">base.html</span></tt> from the <tt class="file docutils literal"><span class="pre">templates</span></tt> folder and change
+it this way:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
@@ -196,8 +215,11 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 <span class="nt">&lt;/html&gt;</span>
 </pre></div>
 </div>
-<p>It now contains two <strong>blocks</strong>. These will be filled by the templates which derive from this one.</p>
-<p>Now you have to create two folders for the templates inside the application folder: <tt class="file docutils literal"><span class="pre">recipes/templates/recipes/</span></tt>. Create the file <tt class="file docutils literal"><span class="pre">index.html</span></tt> inside this new folders.</p>
+<p>It now contains two <strong>blocks</strong>. These will be filled by the templates which
+derive from this one.</p>
+<p>Now you have to create two folders for the templates inside the application
+folder: <tt class="file docutils literal"><span class="pre">recipes/templates/recipes/</span></tt>. Create the file <tt class="file docutils literal"><span class="pre">index.html</span></tt>
+inside this new folders.</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span> - All Recipes<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
@@ -236,11 +258,13 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
     `-- base.html
 </pre></div>
 </div>
-<p>After restarting the development server and opening <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> you will see a list of all recipes.</p>
+<p>After restarting the development server and opening <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>
+you will see a list of all recipes.</p>
 </div>
 <div class="section" id="create-the-second-view">
 <h2>Create the second view<a class="headerlink" href="#create-the-second-view" title="Permalink to this headline">¶</a></h2>
-<p>Now we need a second view to get the recipe details and begin with adding another import to the top <tt class="file docutils literal"><span class="pre">views.py</span></tt>:</p>
+<p>Now we need a second view to get the recipe details and begin with adding
+another import to the top <tt class="file docutils literal"><span class="pre">views.py</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
 </pre></div>
 </div>
@@ -255,7 +279,7 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
     <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>The whole files now looks like this:</p>
+<p>The whole file now looks like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span><span class="p">,</span> <span class="n">HttpResponse</span>
 <span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">loader</span>
 
@@ -282,7 +306,8 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 </div>
 <div class="section" id="create-the-detail-template">
 <h2>Create the detail template<a class="headerlink" href="#create-the-detail-template" title="Permalink to this headline">¶</a></h2>
-<p>Now we need the second template <tt class="file docutils literal"><span class="pre">recipes/detail.html</span></tt> inside the same folder <tt class="file docutils literal"><span class="pre">index.html</span></tt> is located.</p>
+<p>Now we need the second template <tt class="file docutils literal"><span class="pre">recipes/detail.html</span></tt> inside the same
+folder <tt class="file docutils literal"><span class="pre">index.html</span></tt> is located.</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span> - <span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
@@ -302,7 +327,9 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 </div>
 <div class="section" id="why-does-the-template-engine-hide-non-existing-variables">
 <h2>Why does the template engine hide non-existing variables?<a class="headerlink" href="#why-does-the-template-engine-hide-non-existing-variables" title="Permalink to this headline">¶</a></h2>
-<p>The Django template engine ignores variables which aren&#8217;t defined as key in the context. This is reasonable in a production environment, where you want the site to work even when a variable is missing.</p>
+<p>The Django template engine ignores variables which aren&#8217;t defined as key in
+the context. This is reasonable in a production environment, where you want
+the site to work even when a variable is missing.</p>
 <p>You can add a line to <tt class="file docutils literal"><span class="pre">settings.py</span></tt> to change this behavior.</p>
 <blockquote>
 <div>TEMPLATE_STRING_IF_INVALID = &#8216;TEMPLATE NAME ERROR&#8217;</div></blockquote>
@@ -310,7 +337,9 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 </div>
 <div class="section" id="escaping-html-and-javascript">
 <h2>Escaping HTML and JavaScript<a class="headerlink" href="#escaping-html-and-javascript" title="Permalink to this headline">¶</a></h2>
-<p>Django&#8217;s template engine escapes all HTML and JavaScript in the context because of security reasons. Imagine a user writes the following text into the field <em>preparation</em> of his recipe:</p>
+<p>Django&#8217;s template engine escapes all HTML and JavaScript in the context
+because of security reasons. Imagine a user writes the following text into
+the field <em>preparation</em> of his recipe:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;The world&#39;s best recipe!&quot;</span><span class="p">)</span><span class="nt">&lt;/script&gt;</span>
 </pre></div>
 </div>
@@ -319,7 +348,8 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 </pre></div>
 </div>
 <p>The JavaScript won&#8217;t be executed.</p>
-<p>It&#8217;s also possible to remove all HTML tags. To do this, you have to use the <tt class="docutils literal"><span class="pre">striptags</span></tt> filter:</p>
+<p>It&#8217;s also possible to remove all HTML tags. To do this, you have to use the
+<tt class="docutils literal"><span class="pre">striptags</span></tt> filter:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="nt">&lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}</span><span class="nt">&lt;/h2&gt;</span>
 <span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">object.number_of_portions</span> <span class="cp">}}</span> portions.<span class="nt">&lt;/p&gt;</span>
@@ -335,7 +365,8 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span>alert(<span class="ni">&amp;quot;</span>The world<span class="ni">&amp;#39;</span>s best recipe!<span class="ni">&amp;quot;</span>)<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div>
-<p>If you are sure that HTML and JavaScript should be rendered and execured, you can use the <tt class="docutils literal"><span class="pre">safe</span></tt> filter to allow it explicitly.</p>
+<p>If you are sure that HTML and JavaScript should be rendered and execured,
+you can use the <tt class="docutils literal"><span class="pre">safe</span></tt> filter to allow it explicitly.</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="nt">&lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}</span><span class="nt">&lt;/h2&gt;</span>
 <span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">object.number_of_portions</span> <span class="cp">}}</span> portions.<span class="nt">&lt;/p&gt;</span>
@@ -353,7 +384,8 @@ exception. That&#8217;s correct because by now you didn&#8217;t create any view.
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This can lead to <a class="reference external" href="https://de.wikipedia.org/wiki/Cross-Site-Scripting">XSS attacks</a> and should only be used when you are absolutely sure what you are doing.</p>
+<p class="last">This can lead to <a class="reference external" href="https://de.wikipedia.org/wiki/Cross-Site-Scripting">XSS attacks</a> and should only be used when you are
+absolutely sure what you are doing.</p>
 </div>
 </div>
 <div class="section" id="resources">

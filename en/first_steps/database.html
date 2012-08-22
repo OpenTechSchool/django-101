@@ -54,21 +54,21 @@
             
   <div class="section" id="database">
 <h1>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h1>
-<p>Now we want to update the database and and then start the development webserver,
-to fill the cookbook over the admin interface.</p>
+<p>Now we want to update the database and and then start the development
+webserver, to fill the cookbook over the admin interface.</p>
 <div class="section" id="validate-the-data-model">
 <h2>Validate the data model<a class="headerlink" href="#validate-the-data-model" title="Permalink to this headline">¶</a></h2>
 <p>With the following command you can validate the your data model:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py validate
 </pre></div>
 </div>
-<p>Django generally checks the data model on all operations, which use models.
+<p>Django generally checks the data model on all operations which use models.
 This command allows you to explicitly check the validity of your model.</p>
 </div>
 <div class="section" id="synchronise-the-database">
 <h2>Synchronise the database<a class="headerlink" href="#synchronise-the-database" title="Permalink to this headline">¶</a></h2>
-<p>The database is filled by SQL Queries. Django create those for you, but
-if you are interested whats going on the following command shows you
+<p>The database is filled by SQL Queries. Django creates those for you, but
+if you are interested what&#8217;s going on the following command shows you
 the queries:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py sqlall recipes
 </pre></div>
@@ -106,8 +106,8 @@ the queries:</p>
 <span class="k">COMMIT</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>To execute these queries and to create the tables and indices with it, you have
-to run the following command.:</p>
+<p>To execute these queries and to create the tables and indices with it, you
+have to run the following command.:</p>
 <div class="highlight-python"><pre>$ python manage.py syncdb
 Creating tables ...
 Creating table auth_permission
@@ -140,7 +140,8 @@ Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 </pre></div>
 </div>
-<p>Under the URL <a class="reference external" href="http://127.0.0.1:8000/admin/recipes/">http://127.0.0.1:8000/admin/recipes/</a> you can now create some recipes.</p>
+<p>Under the URL <a class="reference external" href="http://127.0.0.1:8000/admin/recipes/">http://127.0.0.1:8000/admin/recipes/</a> you can now create some
+recipes.</p>
 </div>
 <div class="section" id="export-and-import-data-with-json">
 <h2>Export and import data with JSON<a class="headerlink" href="#export-and-import-data-with-json" title="Permalink to this headline">¶</a></h2>
@@ -152,17 +153,18 @@ $ python manage.py dumpdata --indent 4 recipes &gt; recipes/fixtures/initial_dat
 </div>
 <p>Django loads the fixtures from a file named <tt class="file docutils literal"><span class="pre">initial_data.json</span></tt> everytime
 when you run <strong class="program">syncdb</strong>. That means, that the data you just exported
-will be autimatically loaded when you delete or create models in the future.</p>
-<p>It is also possible to load data manually with the following command <strong class="program">loaddata</strong>:</p>
+will be automatically loaded when you delete or create models in the future.</p>
+<p>It is also possible to load data manually with the following command
+<strong class="program">loaddata</strong>:</p>
 <div class="highlight-python"><pre>$ python manage.py loaddata recipes/fixtures/initial_data.json
 Installed 4 object(s) from 1 fixture(s)</pre>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong class="program">loaddata</strong> is not the very best solution to load data from different sources,
-because the fixture alway contain primary keys.
-There are different Apps, for example <a class="reference external" href="http://django-csv-importer.readthedocs.org/">CSV
-importer</a>, that is more suited for importing new data.</p>
+<p class="last"><strong class="program">loaddata</strong> is not the very best solution to load data from
+different sources, because the fixture alway contain primary keys.
+There are different Apps, for example <a class="reference external" href="http://django-csv-importer.readthedocs.org/">CSV importer</a>, that is more
+suited for importing new data.</p>
 </div>
 </div>
 <div class="section" id="further-django-ressources">
