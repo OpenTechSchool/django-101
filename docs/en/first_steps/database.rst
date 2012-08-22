@@ -1,8 +1,8 @@
 Database
 ********
 
-Now we want to update the database and and then start the development webserver,
-to fill the cookbook over the admin interface.
+Now we want to update the database and and then start the development
+webserver, to fill the cookbook over the admin interface.
 
 Validate the data model
 =======================
@@ -13,14 +13,14 @@ With the following command you can validate the your data model:
 
     $ python manage.py validate
 
-Django generally checks the data model on all operations, which use models. 
+Django generally checks the data model on all operations which use models. 
 This command allows you to explicitly check the validity of your model.
 
 Synchronise the database
 ========================
 
-The database is filled by SQL Queries. Django create those for you, but 
-if you are interested whats going on the following command shows you
+The database is filled by SQL Queries. Django creates those for you, but 
+if you are interested what's going on the following command shows you
 the queries:
 
 ..  code-block:: bash
@@ -61,8 +61,8 @@ the queries:
     CREATE INDEX "recipes_recipe_cc846901" ON "recipes_recipe" ("author_id");
     COMMIT;
 
-To execute these queries and to create the tables and indices with it, you have
-to run the following command.::
+To execute these queries and to create the tables and indices with it, you
+have to run the following command.::
 
     $ python manage.py syncdb
     Creating tables ...
@@ -99,7 +99,8 @@ After the database update you can start the development server again:
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
-Under the URL http://127.0.0.1:8000/admin/recipes/ you can now create some recipes.
+Under the URL http://127.0.0.1:8000/admin/recipes/ you can now create some
+recipes.
 
 Export and import data with JSON
 ================================
@@ -113,19 +114,20 @@ you can export the models you created from the application ``recipes``::
 
 Django loads the fixtures from a file named :file:`initial_data.json` everytime
 when you run :program:`syncdb`. That means, that the data you just exported 
-will be autimatically loaded when you delete or create models in the future.
+will be automatically loaded when you delete or create models in the future.
 
-It is also possible to load data manually with the following command :program:`loaddata`::
+It is also possible to load data manually with the following command
+:program:`loaddata`::
 
     $ python manage.py loaddata recipes/fixtures/initial_data.json
     Installed 4 object(s) from 1 fixture(s)
 
 .. note::
 
-    :program:`loaddata` is not the very best solution to load data from different sources,
-    because the fixture alway contain primary keys.
-    There are different Apps, for example `CSV
-    importer`_, that is more suited for importing new data.
+    :program:`loaddata` is not the very best solution to load data from
+    different sources, because the fixture alway contain primary keys.
+    There are different Apps, for example `CSV importer`_, that is more
+    suited for importing new data.
 
 .. _CSV importer: http://django-csv-importer.readthedocs.org/
 
