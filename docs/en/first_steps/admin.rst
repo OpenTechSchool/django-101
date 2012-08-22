@@ -35,7 +35,7 @@ This makes the admin and your app's models available.
 
 .. note::
 
-    The second ``import`` is a relative import. These are defined in :pep:`328` and implemented in Python 2.6 and above. In Python 2.5 you have to insert the following line bevor the relative import::
+    The second ``import`` is a relative import. These are defined in :pep:`328` and implemented in Python 2.6 and above. In Python 2.5 you have to insert the following line before the relative import::
 
         from __future__ import absolute_import
 
@@ -49,7 +49,7 @@ Next we create a class to register the model ``Category`` with the admin::
 
 And that's all.
 
-The attribute ``prepopulated_fields`` tells the admin application to to automaticly fill the field ``slug`` - in this case with the text entered into the ``name`` field.
+The attribute ``prepopulated_fields`` tells the admin application to to automatically fill the field ``slug`` - in this case with the text entered into the ``name`` field.
 
 Now we do the same with the ``Recipe`` model::
 
