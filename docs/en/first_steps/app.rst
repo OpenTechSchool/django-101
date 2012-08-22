@@ -8,7 +8,7 @@ Here is the data model:
 .. graphviz:: models.dot
 
 - the app's name is *recipes*
-- there are two models: *Recipe* and *Category*
+- there are two data models: *Recipe* and *Category*
 - bold fields in the model are required
 - the field *id* will be generated automatically by Django's ORM and used as primary key
 - both models are connected through a many-to-many relationship named *category*
@@ -34,7 +34,10 @@ This command creates a folder :file:`recipes` which contains four files:
     |-- tests.py
     `-- views.py
 
-As in the :file:`cookbook` directory, the file :file:`__index__.py` makes the folder a `Python package <http://docs.python.org/tutorial/modules.html#packages>`_. The application's models go into :file:`models.py`. Tests go into :file:`tests.py` and views into :file:`views.py`.
+As in the :file:`cookbook` directory, the file :file:`__index__.py` makes the
+folder a `Python package <http://docs.python.org/tutorial/modules.html#packages>`_.
+The application's models go into :file:`models.py`. Tests go into :file:`tests.py`
+and views into :file:`views.py`.
 
 The models
 ==========
@@ -45,7 +48,8 @@ Open the file :file:`models.py` in a text editor. It only contains an import::
 
 The ``models`` module contains the fields and other parts of the ORM.
 
-To make your life easier with special characters, add the following line above the ``import``::
+To make your life easier with special characters, add the following line above
+the ``import``::
 
     # encoding: utf-8
 
@@ -56,18 +60,23 @@ The model for the categories
 Below these two lines we start with the first model for the categories::
 
     class Category(models.Model):
-        """Category model."""
+        """
+        A model class describing a category.
+        """
         name = models.CharField(u'Name', max_length=100)
         slug = models.SlugField(unique=True)
         description = models.TextField(u'Description', blank=True)
 
-The models has three attributes which correspond to three rows in a table. The field types define data type.
+The model has three attributes which correspond to three rows in a table.
+The field types define data type.
 
 For instance the attribute ``name`` leads to ``VARCHAR(100)`` in the database.
 
-The first parameter is optional and can be used to give the field a name which will be used as label in the admin application.
+The first parameter is optional and can be used to give the field a name
+which will be used as label in the admin application.
 
-The parameter ``blank=True`` allows the field to be empty. All fields are required in default.
+The parameter ``blank=True`` allows the field to be empty. All fields are
+required in default.
 
 Now we extend the class ``Category`` with the following code::
 
@@ -80,7 +89,8 @@ Now we extend the class ``Category`` with the following code::
 
 The class ``Meta`` has two attributes which define the model's name.
 
-The ``__unicode__`` method returns a unicode string. This will be used in the admin application amongst other things.
+The ``__unicode__`` method returns a unicode string. This will be used in
+the admin application amongst other things.
 
 The models for the recipes
 --------------------------
@@ -88,7 +98,9 @@ The models for the recipes
 Now we create the second model for the recipes::
 
     class Recipe(models.Model):
-        """Recipe model."""
+        """
+        A model describing a coobook recipe.
+        """
         title = models.CharField(u'Title', max_length=255)
         slug = models.SlugField(unique=True)
         ingredients = models.TextField(u'Indigrents',
@@ -98,9 +110,12 @@ Now we create the second model for the recipes::
             help_text=u'In minutes', blank=True, null=True)
         number_of_portions = models.PositiveIntegerField(u'Number of portions')
 
-This models is similar to the first one. We introduced the parameter ``help_text`` which will be shown as help text in the admin application's edit mode.
+This models is similar to the first one. We introduced the parameter
+``help_text`` which will be shown as help text in the admin application's
+edit mode.
 
-There is also an ``IntegerField``. You should use ``null=True`` here if no input is required, because otherwise an empty string will be used.
+There is also an ``IntegerField``. You should use ``null=True`` here if no
+input is required, because otherwise an empty string will be used.
 
 Now add five more fields to the model::
 
@@ -110,17 +125,25 @@ Now add five more fields to the model::
     date_created = models.DateTimeField(editable=False)
     date_updated = models.DateTimeField(editable=False)
 
-Here we use a ``ManyToManyField`` to create a relation to the ``Category`` model. The ``ManyToManyField`` expects the related model class as first argument. Therefore we have to define the label in the admin interface with the named parameter ``verbose_name``.
+Here we use a ``ManyToManyField`` to create a relation to the ``Category``
+model. The ``ManyToManyField`` expects the related model class as first
+argument. Therefore we have to define the label in the admin interface with
+the named parameter ``verbose_name``.
 
-The recipe's author is stored in a ``ForeignKey`` field which represents a many-to-one relation.
+The recipe's author is stored in a ``ForeignKey`` field which represents a
+many-to-one relation.
 
-The time values shouldn't be editable in the admin application, so we set the parameter ``editable=False``.
+The time values shouldn't be editable in the admin application, so we set
+the parameter ``editable=False``.
 
-The ``User`` object has to be imported to be available. We import it from Django's auth application::
+The ``User`` object has to be imported to be available. We import it from
+Django's auth application::
 
     from django.contrib.auth.models import User
 
-The field ``difficulty`` is a ``SmallIntegerField``. Because the users shouldn't have to enter a number but get a list, we create the choices at the beginning of the model class::
+The field ``difficulty`` is a ``SmallIntegerField``. Because the users
+shouldn't have to enter a number but get a list, we create the choices at
+the beginning of the model class::
 
     DIFFICULTY_EASY = 1
     DIFFICULTY_MEDIUM = 2
@@ -146,9 +169,12 @@ We also add a ``Meta`` class and a ``__unicode__`` method::
         def __unicode__(self):
             return self.title
 
-In addition we use the attribute ``ordering`` in the ``Meta`` class to define the default ordering.
+In addition we use the attribute ``ordering`` in the ``Meta`` class to define
+the default ordering.
 
-The time values should be filled automatically because we didn't allow them to be edited in the admin application. To make this happen we override the ``save`` method::
+The time values should be filled automatically because we didn't allow them
+to be edited in the admin application. To make this happen we override the
+``save`` method::
 
         def save(self, *args, **kwargs):
             if not self.id:
@@ -156,17 +182,23 @@ The time values should be filled automatically because we didn't allow them to b
             self.date_updated = now()
             super(Recipe, self).save(*args, **kwargs)
 
-The field ``date_created`` only gets filled when the model is saved the first time what is determined by ``id`` not having a value. The field ``date_updated`` will be refreshed every time the model gets saved. At the bottom of the ``save`` method we call the super_ function.
+The field ``date_created`` only gets filled when the model is saved the first
+time what is determined by ``id`` not having a value. The field
+``date_updated`` will be refreshed every time the model gets saved. At the
+bottom of the ``save`` method we call the super_ function.
 
 .. _super: http://docs.python.org/library/functions.html#super
 
-The package now also has to be imported so we add the following line to the top of the file::
+The package now also has to be imported so we add the following line to the
+top of the file::
 
     from django.utils.timezone import now
 
 .. note::
 
-    You can read more about ``import`` in :pep:`8`, in the `Python documentation <http://docs.python.org/reference/simple_stmts.html#import>`_ and in this `article <http://effbot.org/zone/import-confusion.htm>`_.
+    You can read more about ``import`` in :pep:`8`, in the
+    `Python documentation <http://docs.python.org/reference/simple_stmts.html#import>`_
+    and in this `article <http://effbot.org/zone/import-confusion.htm>`_.
 
 The whole file
 ==============
@@ -180,7 +212,9 @@ The file ``models.py`` now should look like this::
 
 
     class Category(models.Model):
-        """Category model."""
+        """
+        A model class describing a category.
+        """
         name = models.CharField(u'Name', max_length=100)
         slug = models.SlugField(unique=True)
         description = models.TextField(u'Description', blank=True)
@@ -194,7 +228,9 @@ The file ``models.py`` now should look like this::
 
 
     class Recipe(models.Model):
-        """Recipe model."""
+        """
+        A model describing a coobook recipe.
+        """
         DIFFICULTY_EASY = 1
         DIFFICULTY_MEDIUM = 2
         DIFFICULTY_HARD = 3
@@ -235,9 +271,11 @@ The file ``models.py`` now should look like this::
 Activating the application
 ==========================
 
-To use the application in our project, it has to be activated in the configuration.
+To use the application in our project, it has to be activated in the
+configuration.
 
-Open the file :file:`settings.py` and add the application's name the end of ``INSTALLED_APPS``.
+Open the file :file:`settings.py` and add the application's name the end
+of ``INSTALLED_APPS``.
 
 ``INSTALLED_APPS`` now looks like this::
 

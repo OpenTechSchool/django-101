@@ -18,7 +18,8 @@ You can start Djangos development webserver with the following command:
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
-Open the URL http://127.0.0.1:8000/ in your browser to view Djangos welcome page.
+Open the URL ``http://127.0.0.1:8000/`` in your browser to view Django's
+welcome page.
 
 The first own page
 ==================
@@ -28,7 +29,10 @@ Only a few steps are needed to show simple first page.
 Create a template
 -----------------
 
-The first thing you need for your website is a template. Create a folder :file:`templates` in the project directory. (Remember that the directory :file:`cookbook` that contains :file:`manage.py`.) In the new directory you create the file :file:`base.html`:
+The first thing you need for your website is a template. Create a folder
+:file:`templates` in the project directory. (Remember that the directory
+:file:`cookbook` that contains :file:`manage.py`.) In the new directory you
+create the file :file:`base.html`:
 
 .. code-block:: html+django
 
@@ -36,7 +40,7 @@ The first thing you need for your website is a template. Create a folder :file:`
     <html>
     <head>
         <meta charset="utf-8">
-    	<title>Cookbook</title>
+        <title>Cookbook</title>
     </head>
     <body>
         <h1>Cookbook</h1>
@@ -78,25 +82,27 @@ After your edits the file should look line that::
         url(r'^home/', TemplateView.as_view(template_name='base.html'))
     )
 
-Now you can start the development server again and reach the new page under http://127.0.0.1:8000/home/.
+Now you can start the development server again and reach the new page under
+http://127.0.0.1:8000/home/.
 
 
-Activate the Admin-Application 
+Activate the admin application 
 ==============================
 
-Django has an Admin-Application included, that allows you to interact with the database over a web interface.
+Django has an admin application included, that allows you to interact with
+the database over a web interface.
 
 Ajust the configuration
 -----------------------
 
 Open the file :file:`settings.py` and find the section ``INSTALLED_APPS``.
 Remove the comment sign in the line that contains ``'django.contrib.admin',``,
-to activate the Admin-Application.
+to activate the admin application.
 
 Adjust URLConf
 --------------
 
-To make the Admin-Application ready to be openend in the browser, we have
+To make the admin application ready to be openend in the browser, we have
 to activate the URL of it. Open :file:`cookbook/urls.py` and remove the
 comment signs in lines 5, 6 and 17. After that the file should look like
 that::
@@ -124,7 +130,8 @@ that::
 Synchronise the database
 ------------------------
 
-Django already includes an App to do the authentication. To configure the database accordingly, execute the following command::
+Django already includes an App to do the authentication. To configure the
+database accordingly, execute the following command::
 
     $ python manage.py syncdb
     Creating tables ...
@@ -152,12 +159,13 @@ Django already includes an App to do the authentication. To configure the databa
 
 ..  note::
 
-    In the process of installing Djangos authentication app the first time a new admin/superuser is be created.
+    In the process of installing Djangos authentication app the first time
+    a new admin/superuser is be created.
 
-The admin application has the URL http://127.0.0.1:8000/admin/. The credentials are the ones of the superuser you just
-created.
+The admin application has the URL http://127.0.0.1:8000/admin/. The
+credentials are the ones of the superuser you just created.
 
-Weiterführende Links zur Django Dokumentation
-=============================================
+Resources
+=========
 
-* :djangodocs:`Informationen about the Admin-Application <ref/contrib/admin/#ref-contrib-admin>`
+* :djangodocs:`Informationen about the admin application <ref/contrib/admin/#ref-contrib-admin>`

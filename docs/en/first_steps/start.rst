@@ -16,7 +16,7 @@ Create the Django Project
 Our project will be a cookbook, so we name the 
 project aptly :file:`cookbook`.
 
-Change into the 'pythonprojects' dir and create a Django project with 
+Change into the 'pythonprojects' directory and create a Django project with 
 the following commands:
 
 .. code-block:: bash
@@ -30,7 +30,8 @@ the following commands:
 
         C:\pythonprojects> python C:\virtualenvs\django-workshop\Scrips\django-admin.py startproject cookbook
 
-After you created the new project, you can have a look at whats in the :file:`cookbook` directory:
+After you created the new project, you can have a look at whats in the
+:file:`cookbook` directory:
 
 .. code-block:: none
 
@@ -43,9 +44,8 @@ After you created the new project, you can have a look at whats in the :file:`co
     `-- manage.py           
 
 The first directory named :file:`cookbook` is the project directory.
-It contains the file :file:`manage.py`, that is used, to manage the 
-project, e.g. ... . In this document it will be refered as 
-**project directory**.
+It contains the file :file:`manage.py` which is used to manage the 
+project. In this document it will be refered to as **project directory**.
 
 The project directory contains the `Python package
 <http://docs.python.org/tutorial/modules.html#packages>`_ :file:`cookbook`, 
@@ -54,21 +54,21 @@ The empty file :file:`__init__.py` turns that directory into a package.
 The file :file:`settings.py`, contains all the settings of the project. We will
 edit this file in the next step. The file :file:`urls.py` contains rules
 to direct an URL to the right view. Regular expressions are used to 
-describe this rules. We will talk about that later. The file :file:`wsgi.py` 
-defines the WSGI Application, that is needed later for the deployment. 
-This whole directory will be called **configuration directory** in all
-chapters of this document.
+describe these rules. We will talk about that later. The file :file:`wsgi.py` 
+defines the so called WSGI application, that is needed later for the
+deployment. This whole directory will be called **configuration directory**
+in all chapters of this document.
 
 Adjust the configuration
 ========================
 
-The first step of work with the project will be the setting of some 
+The first step of work with the project will be changing some of the 
 configuration values. For that you edit the file :file:`settings.py` 
 with your text editor of choice.
 
 The working directory is used in different places of the settings file.
-For convinience we ... it dynamically and save the value into the "constant"
-SITE_ROOT::
+For convinience we determine the path of the working directory
+programmatically and save the value into the "constant" ``SITE_ROOT``::
 
     import os
 
@@ -76,7 +76,7 @@ SITE_ROOT::
 
 .. note::
 
-    It is a convention in python that to write constants with capital letters.
+    It is a convention in Python to write constants with capital letters.
 
 Now we configure the database connection. We use a `SQLite
 <http://www.sqlite.org/>`_ database, because it is already included in Python
@@ -101,7 +101,7 @@ Next the time zone and language will be set::
 
     TIME_ZONE = 'Europe/Berlin'
 
-    LANGUAGE_CODE = 'de'
+    LANGUAGE_CODE = 'en'
 
 The last thing on the list is to set the path to the templates::
 
@@ -110,16 +110,17 @@ The last thing on the list is to set the path to the templates::
     )
 
 We will create the directory for the templates later in the root directory
-of the project. Notice how we make use of the SITE_ROOT constant.
+of the project. Notice how we make use of the ``SITE_ROOT`` constant.
 
 .. note::
 
     It is possible to have your templates outside of the project.
-    You just would have to reference the path in the TEMPLATE_DIRS constant.
+    You just would have to reference the path in the ``TEMPLATE_DIRS``
+    constant.
 
 
-Further Readings in the Django Documentation
-=============================================
+Resources
+=========
 
 * :djangodocs:`Configuration of Django <topics/settings/#topics-settings>`
 * :djangodocs:`Listing of all possible constants in the settings <ref/settings/#ref-settings>`
