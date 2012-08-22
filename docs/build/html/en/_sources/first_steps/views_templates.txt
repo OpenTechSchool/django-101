@@ -1,7 +1,8 @@
 The first views
 ***************
 
-Now that you've entered some data with the admin application, the next step is to show this data in the front-end. Therefore three things need to be done:
+Now that you've entered some data with the admin application, the next step
+is to show this data in the front-end. Therefore three things need to be done:
 
     #. define URLs
     #. write views
@@ -16,7 +17,9 @@ Now that you've entered some data with the admin application, the next step is t
 Define URLs
 ===========
 
-First, define the URLs which route the request to the views. For now two URLs will be sufficient. Open the file :file:`urls.py` and append the following code to the ``urlpatterns``::
+First, define the URLs which route the request to the views. For now two URLs
+will be sufficient. Open the file :file:`urls.py` and append the following
+code to the ``urlpatterns``::
 
     url(r'^recipes/(?P<slug>[-\w]+)/$', 'recipes.views.detail'),
     url(r'^$', 'recipes.views.index'),
@@ -50,9 +53,14 @@ The file :file:`urls.py` now should look like this::
 
 .. note::
 
-    The ``url`` function's first argument is a `raw string <http://docs.python.org/reference/lexical_analysis.html#string-literals>`_ containing a regular expression.
+    The ``url`` function's first argument is a
+    `raw string <http://docs.python.org/reference/lexical_analysis.html#string-literals>`_
+    containing a regular expression.
 
-    If you are not familiar with regular expressions you can read more in the Regular-Expression-HOWTO_, on Regular-Expressions.info_ or in an article from Doug Hellmann about the re-module_ erfahren. At RegexPlanet_ you can test regular expressions directly in the browser.
+    If you are not familiar with regular expressions you can read more in the
+    Regular-Expression-HOWTO_, on Regular-Expressions.info_ or in an article
+    from Doug Hellmann about the re-module_ erfahren. At RegexPlanet_ you can
+    test regular expressions directly in the browser.
 
 .. _Regular-Expression-HOWTO: http://docs.python.org/howto/regex.html
 .. _Regular-Expressions.info: http://www.regular-expressions.info/
@@ -79,7 +87,8 @@ How a template gets rendered
 
 Before we write the first views we'll look at how Django renders templates.
 
-Django templates are normal Python objects whose constructor expects a string. The placeholders are replaced with the values from a context object.
+Django templates are normal Python objects whose constructor expects a string.
+The placeholders are replaced with the values from a context object.
 
 The first example shows how a dictionary can be used as data structure
 
@@ -89,7 +98,9 @@ The first example shows how a dictionary can be used as data structure
 
 .. note::
 
-    The command :program:`shell` loads the configurations from :file:`settings.py` of the current project. The normal Python interpreter wouldn't do that.
+    The command :program:`shell` loads the configurations from
+    :file:`settings.py` of the current project. The normal Python interpreter
+    wouldn't do that.
 
 ::
 
@@ -119,11 +130,14 @@ Lists can be used as well::
 Create the first view
 =====================
 
-Now we have to create the views. They will use the ORM to get the data from the database.
+Now we have to create the views. They will use the ORM to get the data from
+the database.
 
-Open the file :file:`views.py` in the ``recipes`` application which you have created with the command :command:`startapp recipes`.
+Open the file :file:`views.py` in the ``recipes`` application which you have
+created with the command :command:`startapp recipes`.
 
-Most views return a ``HttpResponse`` object, so we write a really simple view which does exactly this::
+All views return a ``HttpResponse`` object, so we write a really simple view
+which does exactly this::
 
     from django.http import HttpResponse
 
@@ -131,9 +145,12 @@ Most views return a ``HttpResponse`` object, so we write a really simple view wh
     def index(request):
         return HttpResponse('My first view.')
 
-Now open http://127.0.0.1:8000/ in the browser. You will see the string you passed to the ``HttpResponse`` object.
+Now open http://127.0.0.1:8000/ in the browser. You will see the string you
+passed to the ``HttpResponse`` object.
 
-Instead of the string, we'll now load a ``Template`` and render it with a ``Context`` containing a ``Recipe`` object. The rendered string from the ``Template`` is passed to the ``HttpResponse``::
+Instead of the string, we'll now load a ``Template`` and render it with a
+``Context`` containing a ``Recipe`` object. The rendered string from the
+``Template`` is passed to the ``HttpResponse``::
 
     from django.http import HttpResponse
     from django.template import Context, loader
@@ -147,12 +164,14 @@ Instead of the string, we'll now load a ``Template`` and render it with a ``Cont
         c = Context({'object_list': recipes})
         return HttpResponse(t.render(c))
 
-When opening http://127.0.0.1:8000/ you will see a ``TemplateDoesNotExist`` exception. It is raised because the template doesn't exist yet.
+When opening http://127.0.0.1:8000/ you will see a ``TemplateDoesNotExist``
+exception. It is raised because the template doesn't exist yet.
 
 Create the list template
 ========================
 
-Open the file :file:`base.html` from the :file:`templates` folder and change it this way:
+Open the file :file:`base.html` from the :file:`templates` folder and change
+it this way:
 
 .. code-block:: html+django
 
@@ -168,9 +187,12 @@ Open the file :file:`base.html` from the :file:`templates` folder and change it 
     </body>
     </html>
 
-It now contains two **blocks**. These will be filled by the templates which derive from this one.
+It now contains two **blocks**. These will be filled by the templates which
+derive from this one.
 
-Now you have to create two folders for the templates inside the application folder: :file:`recipes/templates/recipes/`. Create the file :file:`index.html` inside this new folders.
+Now you have to create two folders for the templates inside the application
+folder: :file:`recipes/templates/recipes/`. Create the file :file:`index.html`
+inside this new folders.
 
 .. code-block:: html+django
 
@@ -213,12 +235,14 @@ The folder structure should now look like this:
     `-- templates
         `-- base.html
 
-After restarting the development server and opening http://127.0.0.1:8000/ you will see a list of all recipes. 
+After restarting the development server and opening http://127.0.0.1:8000/
+you will see a list of all recipes. 
 
 Create the second view
 ======================
 
-Now we need a second view to get the recipe details and begin with adding another import to the top :file:`views.py`::
+Now we need a second view to get the recipe details and begin with adding
+another import to the top :file:`views.py`::
 
     from django.http import Http404
 
@@ -233,7 +257,7 @@ At the bottom create a new method for the second view::
         c = Context({'object': recipe})
         return HttpResponse(t.render(c))
 
-The whole files now looks like this::
+The whole file now looks like this::
 
     from django.http import Http404, HttpResponse
     from django.template import Context, loader
@@ -260,7 +284,8 @@ The whole files now looks like this::
 Create the detail template
 ==========================
 
-Now we need the second template :file:`recipes/detail.html` inside the same folder :file:`index.html` is located. 
+Now we need the second template :file:`recipes/detail.html` inside the same
+folder :file:`index.html` is located. 
 
 .. code-block:: html+django
 
@@ -283,7 +308,9 @@ Now you can see the recipe details when clicking the links on the start page.
 Why does the template engine hide non-existing variables?
 =========================================================
 
-The Django template engine ignores variables which aren't defined as key in the context. This is reasonable in a production environment, where you want the site to work even when a variable is missing.
+The Django template engine ignores variables which aren't defined as key in
+the context. This is reasonable in a production environment, where you want
+the site to work even when a variable is missing.
 
 You can add a line to :file:`settings.py` to change this behavior.
 
@@ -294,7 +321,9 @@ Remember to remove this setting when the site goes live.
 Escaping HTML and JavaScript
 ============================
 
-Django's template engine escapes all HTML and JavaScript in the context because of security reasons. Imagine a user writes the following text into the field *preparation* of his recipe:
+Django's template engine escapes all HTML and JavaScript in the context
+because of security reasons. Imagine a user writes the following text into
+the field *preparation* of his recipe:
 
 .. code-block:: html
 
@@ -308,7 +337,8 @@ The HTML would look like this:
 
 The JavaScript won't be executed.
 
-It's also possible to remove all HTML tags. To do this, you have to use the ``striptags`` filter:
+It's also possible to remove all HTML tags. To do this, you have to use the
+``striptags`` filter:
 
 .. code-block:: html+django
 
@@ -328,7 +358,8 @@ Now the HTML looks like this
 
     <p>alert(&quot;The world&#39;s best recipe!&quot;)</p>
 
-If you are sure that HTML and JavaScript should be rendered and execured, you can use the ``safe`` filter to allow it explicitly.
+If you are sure that HTML and JavaScript should be rendered and execured,
+you can use the ``safe`` filter to allow it explicitly.
 
 .. code-block:: html+django
 
@@ -350,7 +381,8 @@ Now the JavaScript will be executed by the browser.
 
 .. note::
 
-    This can lead to `XSS attacks`_ and should only be used when you are absolutely sure what you are doing.
+    This can lead to `XSS attacks`_ and should only be used when you are
+    absolutely sure what you are doing.
 
 .. _XSS attacks: https://de.wikipedia.org/wiki/Cross-Site-Scripting
 

@@ -54,11 +54,13 @@
             
   <div class="section" id="the-admin-application">
 <h1>The admin application<a class="headerlink" href="#the-admin-application" title="Permalink to this headline">¶</a></h1>
-<p>With Django it&#8217;s easy to integrate your own application into the admin application.</p>
+<p>With Django it&#8217;s easy to integrate your own application into the admin
+application.</p>
 <div class="section" id="registering-the-application-in-the-admin-app">
 <h2>Registering the application in the admin app<a class="headerlink" href="#registering-the-application-in-the-admin-app" title="Permalink to this headline">¶</a></h2>
-<p>To use our application with the admin app, we have to register it&#8217;s models.</p>
-<p>This is done by creating the file <tt class="file docutils literal"><span class="pre">admin.py</span></tt> in the application directory. The project structure now looks like this:</p>
+<p>To use our application with the admin app, we have to register its models.</p>
+<p>This is done by creating the file <tt class="file docutils literal"><span class="pre">admin.py</span></tt> in the application
+directory. The project structure now looks like this:</p>
 <div class="highlight-none"><div class="highlight"><pre>cookbook
 |-- cookbook
 |   |-- __init__.py
@@ -82,7 +84,9 @@
 <p>This makes the admin and your app&#8217;s models available.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The second <tt class="docutils literal"><span class="pre">import</span></tt> is a relative import. These are defined in <span class="target" id="index-0"></span><a class="pep reference external" href="http://www.python.org/dev/peps/pep-0328"><strong>PEP 328</strong></a> and implemented in Python 2.6 and above. In Python 2.5 you have to insert the following line before the relative import:</p>
+<p>The second <tt class="docutils literal"><span class="pre">import</span></tt> is a relative import. These are defined in
+<span class="target" id="index-0"></span><a class="pep reference external" href="http://www.python.org/dev/peps/pep-0328"><strong>PEP 328</strong></a> and implemented in Python 2.6 and above. In Python 2.5 you
+have to insert the following line before the relative import:</p>
 <div class="last highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 </pre></div>
 </div>
@@ -96,7 +100,9 @@
 </pre></div>
 </div>
 <p>And that&#8217;s all.</p>
-<p>The attribute <tt class="docutils literal"><span class="pre">prepopulated_fields</span></tt> tells the admin application to to automatically fill the field <tt class="docutils literal"><span class="pre">slug</span></tt> - in this case with the text entered into the <tt class="docutils literal"><span class="pre">name</span></tt> field.</p>
+<p>The attribute <tt class="docutils literal"><span class="pre">prepopulated_fields</span></tt> tells the admin application to
+automatically fill the field <tt class="docutils literal"><span class="pre">slug</span></tt> - in this case with the text entered
+into the <tt class="docutils literal"><span class="pre">name</span></tt> field.</p>
 <p>Now we do the same with the <tt class="docutils literal"><span class="pre">Recipe</span></tt> model:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RecipeAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
     <span class="n">prepopulated_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;slug&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]}</span>
@@ -107,7 +113,8 @@
 </div>
 <div class="section" id="the-whole-file">
 <h3>The whole file<a class="headerlink" href="#the-whole-file" title="Permalink to this headline">¶</a></h3>
-<p>The file <tt class="file docutils literal"><span class="pre">admin.py</span></tt> should now look like this (starting with Python 2.6, for Python 2.5 see the note above):</p>
+<p>The file <tt class="file docutils literal"><span class="pre">admin.py</span></tt> should now look like this (starting with Python
+2.6, for Python 2.5 see the note above):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Category</span><span class="p">,</span> <span class="n">Recipe</span>
 
