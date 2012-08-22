@@ -1,0 +1,229 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python &mdash; Django 101 Tutorial</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Django 101 Tutorial" href="../index.html" />
+    <link rel="up" title="Vorbereitung" href="index.html" />
+    <link rel="next" title="Virtualenv" href="virtualenv.html" />
+    <link rel="prev" title="Vorbereitung" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Allgemeiner Index"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="virtualenv.html" title="Virtualenv"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Vorbereitung"
+             accesskey="P">zurück</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Vorbereitung</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="python">
+<h1>Python<a class="headerlink" href="#python" title="Permalink zu dieser Überschrift">¶</a></h1>
+<p>Da Django komplett in Python geschrieben ist muss dies zuerst installiert
+werden.</p>
+<div class="section" id="python-installieren">
+<h2>Python installieren<a class="headerlink" href="#python-installieren" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p>Django 1.4.1 unterstützt die Python Versionen 2.5, 2.6 und 2.7. Wenn
+du eine ältere Python Version hast, solltest du diese aktualisieren. Ab Django
+1.5 wird Python 2.5 nicht mehr unterstützt werden, dafür gibt es aber
+experimetelle Unterstützung für Python 3.3.</p>
+<p>Deine Python Version kannst du heraus finden, indem du den Python Interpreter
+an der Kommandozeile mit der Option <tt class="docutils literal"><span class="pre">-V</span></tt> startest:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python -V
+Python 2.6.1
+</pre></div>
+</div>
+<p>Wenn du Python schon in der richtigen Version installiert hast, kannst du mit
+der Installation des <a class="reference internal" href="#python-paketmanager"><em>Python Paketmanagers</em></a>
+weitermachen.</p>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink zu dieser Überschrift">¶</a></h3>
+<p>Viele Linux Distributionen haben Python schon installiert. Solltest du noch
+kein Python installiert haben kannst du dies meistens mit dem Paketmanager
+nachholen.</p>
+<p>Alternativ kannst du auch die <a class="reference external" href="http://python.org/download/">Quellen von der Python Website herunter laden</a> und selbst kompilieren.</p>
+</div>
+<div class="section" id="mac-os-x">
+<h3>Mac OS X<a class="headerlink" href="#mac-os-x" title="Permalink zu dieser Überschrift">¶</a></h3>
+<p>Mac OS X wird mit einer Python-Installation ausgeliefert: Snow Leopard bringt
+eine Python 2.6 Installation mit, Lion hat Python 2.7.1 installiert.</p>
+<p>Alternativ kannst du auch Python mit Hilfe von <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> installieren.</p>
+</div>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink zu dieser Überschrift">¶</a></h3>
+<p>Lade den <a class="reference external" href="http://python.org/download/">Installer</a> von der Python Website
+herunter und installiere Python.</p>
+</div>
+</div>
+<div class="section" id="python-paketmanager">
+<span id="id1"></span><h2>Python Paketmanager<a class="headerlink" href="#python-paketmanager" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p>Python benutzt ein eigenes Paketsystem zur Verteilung und Installation von
+Python Paketen. Da wir einige Pakete installieren werden muss vorher der
+Paketmanager installiert werden.</p>
+<div class="section" id="distribute">
+<h3>distribute<a class="headerlink" href="#distribute" title="Permalink zu dieser Überschrift">¶</a></h3>
+<p>Zuerst muss <strong class="program">distribute</strong> installiert werden. <strong class="program">distribute</strong>
+ist ein Ersatz für <strong class="program">setuptools</strong>, dass auf machen Systemen schon
+installiert ist.</p>
+<p>Es wird mit Hilfe eines Bootstrap-Skripts installiert:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>wget http://python-distribute.org/distribute_setup.py
+<span class="nv">$ </span>python distribute_setup.py
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Bemerkung</p>
+<p class="last">Unter Linux und Mac OS X werden evtl. <em>root</em>-Rechte für die Installation
+benötigt.</p>
+</div>
+</div>
+<div class="section" id="pip">
+<h3>pip<a class="headerlink" href="#pip" title="Permalink zu dieser Überschrift">¶</a></h3>
+<p>Das eigentliche Programm zum Installieren der Pakete ist <strong class="program">pip</strong>. Es
+ist ein Ersatz für <strong class="program">easy_install</strong> mit <a class="reference external" href="http://www.pip-installer.org/en/latest/index.html#pip-compared-to-easy-install">größerem Funktionsumfang</a>.
+<strong class="program">pip</strong> kann mit dessen Hilfe von <strong class="program">easy_install</strong> installiert
+werden:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>easy_install pip
+</pre></div>
+</div>
+<p>Falls <strong class="program">easy_install</strong> nicht installiert ist, kann <strong class="program">pip</strong> auch
+mit Hilfe eines Bootstrap-Skripts installiert werden:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+<span class="nv">$ </span>python get-pip.py
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Bemerkung</p>
+<p class="last">Unter Linux und Mac OS X werden evtl. <em>root</em>-Rechte für die Installation
+benötigt.</p>
+</div>
+<p>Nach der Installation kannst du <strong class="program">pip</strong> so testen:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip --version
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="weiterfuhrende-links">
+<h2>Weiterführende Links<a class="headerlink" href="#weiterfuhrende-links" title="Permalink zu dieser Überschrift">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://python.org/">Python Homepage</a></li>
+<li><a class="reference external" href="http://docs.python.org/tutorial/index.html">Offizielles Python Tutorial</a></li>
+<li><a class="reference external" href="http://learnpythonthehardway.org/">Learn Python The Hard Way</a></li>
+<li><a class="reference external" href="http://python.net/~goodger/projects/pycon/2007/idiomatic/presentation.html">Code Like a Pythonista: Idiomatic Python (interaktives Tutorial)</a></li>
+<li><a class="reference external" href="http://packages.python.org/distribute/">distribute Dokumentation</a></li>
+<li><a class="reference external" href="http://www.pip-installer.org/">pip Homepage</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python</a><ul>
+<li><a class="reference internal" href="#python-installieren">Python installieren</a><ul>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#mac-os-x">Mac OS X</a></li>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-paketmanager">Python Paketmanager</a><ul>
+<li><a class="reference internal" href="#distribute">distribute</a></li>
+<li><a class="reference internal" href="#pip">pip</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#weiterfuhrende-links">Weiterführende Links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="index.html"
+                        title="vorheriges Kapitel">Vorbereitung</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="virtualenv.html"
+                        title="nächstes Kapitel">Virtualenv</a></p>
+  <h3>Diese Seite</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/vorbereitung/python.txt"
+           rel="nofollow">Quelltext anzeigen</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Geben Sie Suchbegriffe oder einen Modul-, Klassen- oder Funktionsnamen ein.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Allgemeiner Index"
+             >Index</a></li>
+        <li class="right" >
+          <a href="virtualenv.html" title="Virtualenv"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Vorbereitung"
+             >zurück</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" >Vorbereitung</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright .
+    <br />Dieses Werk ist unter einem <a href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland Lizenzvertrag</a> lizenziert.<br />
+      Mit <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3 erstellt.
+    </div>
+  </body>
+</html>

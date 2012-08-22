@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Virtualenv &mdash; Django 101 Tutorial</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Django 101 Tutorial" href="../index.html" />
+    <link rel="up" title="Vorbereitung" href="index.html" />
+    <link rel="next" title="Django" href="django.html" />
+    <link rel="prev" title="Python" href="python.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Allgemeiner Index"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="django.html" title="Django"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             accesskey="P">zurück</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Vorbereitung</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="virtualenv">
+<h1>Virtualenv<a class="headerlink" href="#virtualenv" title="Permalink zu dieser Überschrift">¶</a></h1>
+<div class="section" id="was-ist-virtualenv">
+<h2>Was ist virtualenv?<a class="headerlink" href="#was-ist-virtualenv" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p>Wenn man beginnt an mehreren Projekten parallel zu arbeiten kommt irgendwann
+der Zeitpunkt, an den Kollisionen bei den installierten Paketen auftreten.</p>
+<p>Ein altes Projekt benutzt zum Beispiel noch Django 1.2 und kann aus Zeitmangel
+nicht migriert werden. Gleichzeitig soll aber ein neues Projekt mit Django
+1.4.1 gestartet werden.</p>
+<p>Solche Probleme kann <strong class="program">virtualenv</strong> lösen.</p>
+<p><strong class="program">virtualenv</strong> kann für jedes Projekt einen &#8220;Container&#8221; erstellen, der
+die installierten Pakete von der Basisinstallation abkapselt.</p>
+<p>Außerdem kann <strong class="program">virtualenv</strong> jeder Umgebung eine bestimmte Python
+Version zuordnen. Man kann also eine virtuelle Arbeitsumgebung mit Python 2.5
+erstellen, die nächste mit Python 2.6.</p>
+<p>Außerdem lässt sich <strong class="program">virtualenv</strong> auch im Produktivbetrieb auf dem
+Server einsetzen. Man kann dort also die gleiche Umgebung nutzen wie schon
+während der Entwicklung.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p><strong class="program">virtualenv</strong> wird mit Hilfe von <strong class="program">pip</strong> installiert:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install virtualenv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Bemerkung</p>
+<p class="last">Unter Linux und Mac OS X werden evtl. <em>root</em>-Rechte für die Installation
+benötigt.</p>
+</div>
+<p>Nach der Installation sollte ein Verzeichnis für <em>alle</em> virtuellen Projekte
+anlegt werden, zum Beispiel im Home-Verzeichnis:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkdir .virtualenvs
+</pre></div>
+</div>
+</div>
+<div class="section" id="einfacher-arbeiten-mit-virtualenvwrapper">
+<h2>Einfacher Arbeiten mit virtualenvwrapper<a class="headerlink" href="#einfacher-arbeiten-mit-virtualenvwrapper" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p>Um die Arbeit mit <strong class="program">virtualenv</strong> zu vereinfachen kann man unter Linux
+oder Mac OS X das Paket <strong class="program">virtualenvwrapper</strong> installieren:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install virtualenvwrapper
+</pre></div>
+</div>
+<p>Nach der Installation werden die folgenden beiden Zeilen in die Datei
+<tt class="file docutils literal"><span class="pre">.bashrc</span></tt> oder <tt class="file docutils literal"><span class="pre">.profile</span></tt> eingefügt:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">WORKON_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.virtualenvs
+<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
+</pre></div>
+</div>
+<p>Dadurch &#8220;weiss&#8221; <strong class="program">virtualenvwrapper</strong> wo sich alle virtuellen
+Arbeitsumgebungen befinden. Das Skript <tt class="file docutils literal"><span class="pre">virtualenvwrapper.sh</span></tt> lädt die
+Shell-Befehle, mit denen wir arbeiten werden.</p>
+<p>Nach dem Bearbeiten von <tt class="file docutils literal"><span class="pre">.bashrc</span></tt> oder <tt class="file docutils literal"><span class="pre">.profile</span></tt> muss die
+Konfiguration noch einmal neu geladen werden. Dabei legt
+<strong class="program">virtualenvwrapper</strong> die nötigen Skripte an:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source</span> .bashrc
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/initialize
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/premkvirtualenv
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/postmkvirtualenv
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/prermvirtualenv
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/postrmvirtualenv
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/predeactivate
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/postdeactivate
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/preactivate
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/postactivate
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/get_env_details
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/premkproject
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/postmkproject
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/prermproject
+virtualenvwrapper.user_scripts creating /home/vagrant/.virtualenvs/postrmproject
+</pre></div>
+</div>
+</div>
+<div class="section" id="weiterfuhrende-links">
+<h2>Weiterführende Links<a class="headerlink" href="#weiterfuhrende-links" title="Permalink zu dieser Überschrift">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.virtualenv.org/en/latest/">virtualenv Dokumentation</a></li>
+<li><a class="reference external" href="http://www.doughellmann.com/projects/virtualenvwrapper/">virtualenvwrapper Homepage</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Virtualenv</a><ul>
+<li><a class="reference internal" href="#was-ist-virtualenv">Was ist virtualenv?</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#einfacher-arbeiten-mit-virtualenvwrapper">Einfacher Arbeiten mit virtualenvwrapper</a></li>
+<li><a class="reference internal" href="#weiterfuhrende-links">Weiterführende Links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="python.html"
+                        title="vorheriges Kapitel">Python</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="django.html"
+                        title="nächstes Kapitel">Django</a></p>
+  <h3>Diese Seite</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/vorbereitung/virtualenv.txt"
+           rel="nofollow">Quelltext anzeigen</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Geben Sie Suchbegriffe oder einen Modul-, Klassen- oder Funktionsnamen ein.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Allgemeiner Index"
+             >Index</a></li>
+        <li class="right" >
+          <a href="django.html" title="Django"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             >zurück</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" >Vorbereitung</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright .
+    <br />Dieses Werk ist unter einem <a href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland Lizenzvertrag</a> lizenziert.<br />
+      Mit <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3 erstellt.
+    </div>
+  </body>
+</html>

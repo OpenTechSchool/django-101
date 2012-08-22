@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Start a new project &mdash; Django 101 Tutorial</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Django 101 Tutorial" href="../index.html" />
+    <link rel="up" title="Erste Schritte mit Django" href="index.html" />
+    <link rel="next" title="Development Webserver" href="testserver.html" />
+    <link rel="prev" title="Erste Schritte mit Django" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="testserver.html" title="Development Webserver"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Erste Schritte mit Django"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Erste Schritte mit Django</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="start-a-new-project">
+<h1>Start a new project<a class="headerlink" href="#start-a-new-project" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-folder-for-all-python-projects">
+<h2>A folder for all python projects<a class="headerlink" href="#a-folder-for-all-python-projects" title="Permalink to this headline">¶</a></h2>
+<p>Lets create a folder for this and future projects:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkdir pythonprojects
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-django-project">
+<h2>Create the Django Project<a class="headerlink" href="#create-the-django-project" title="Permalink to this headline">¶</a></h2>
+<p>Our project will be a cookbook, so we name the
+project aptly <tt class="file docutils literal"><span class="pre">cookbook</span></tt>.</p>
+<p>Change into the &#8216;pythonprojects&#8217; directory and create a Django project with
+the following commands:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>pythonprojects
+<span class="nv">$ </span>django-admin.py startproject cookbook
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In Windows it could be possible that you have to enter the full path <tt class="file docutils literal"><span class="pre">django-admin.py</span></tt>:</p>
+<div class="last highlight-python"><pre>C:\pythonprojects&gt; python C:\virtualenvs\django-workshop\Scrips\django-admin.py startproject cookbook</pre>
+</div>
+</div>
+<p>After you created the new project, you can have a look at whats in the
+<tt class="file docutils literal"><span class="pre">cookbook</span></tt> directory:</p>
+<div class="highlight-none"><div class="highlight"><pre>cookbook # project directory
+|-- cookbook # config directory
+|   |-- __init__.py
+|   |-- settings.py
+|   |-- urls.py
+|   `-- wsgi.py
+`-- manage.py
+</pre></div>
+</div>
+<p>The first directory named <tt class="file docutils literal"><span class="pre">cookbook</span></tt> is the project directory.
+It contains the file <tt class="file docutils literal"><span class="pre">manage.py</span></tt> which is used to manage the
+project. In this document it will be refered to as <strong>project directory</strong>.</p>
+<p>The project directory contains the <a class="reference external" href="http://docs.python.org/tutorial/modules.html#packages">Python package</a> <tt class="file docutils literal"><span class="pre">cookbook</span></tt>,
+with the central configuration for the Django project.
+The empty file <tt class="file docutils literal"><span class="pre">__init__.py</span></tt> turns that directory into a package.
+The file <tt class="file docutils literal"><span class="pre">settings.py</span></tt>, contains all the settings of the project. We will
+edit this file in the next step. The file <tt class="file docutils literal"><span class="pre">urls.py</span></tt> contains rules
+to direct an URL to the right view. Regular expressions are used to
+describe these rules. We will talk about that later. The file <tt class="file docutils literal"><span class="pre">wsgi.py</span></tt>
+defines the so called WSGI application, that is needed later for the
+deployment. This whole directory will be called <strong>configuration directory</strong>
+in all chapters of this document.</p>
+</div>
+<div class="section" id="adjust-the-configuration">
+<h2>Adjust the configuration<a class="headerlink" href="#adjust-the-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The first step of work with the project will be changing some of the
+configuration values. For that you edit the file <tt class="file docutils literal"><span class="pre">settings.py</span></tt>
+with your text editor of choice.</p>
+<p>The working directory is used in different places of the settings file.
+For convinience we determine the path of the working directory
+programmatically and save the value into the &#8220;constant&#8221; <tt class="docutils literal"><span class="pre">SITE_ROOT</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">SITE_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is a convention in Python to write constants with capital letters.</p>
+</div>
+<p>Now we configure the database connection. We use a <a class="reference external" href="http://www.sqlite.org/">SQLite</a> database, because it is already included in Python
+2.5 and later as <tt class="docutils literal"><span class="pre">sqlite3</span></tt>.</p>
+<p>If you use Python 2.4, you would have to install the package SQLite manually.</p>
+<p>Configure the database connection <tt class="docutils literal"><span class="pre">default</span></tt> like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
+        <span class="s">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SITE_ROOT</span><span class="p">,</span> <span class="s">&#39;..&#39;</span><span class="p">,</span> <span class="s">&#39;cookbook.db&#39;</span><span class="p">),</span>
+        <span class="s">&#39;USER&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;HOST&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PORT&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next the time zone and language will be set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s">&#39;Europe/Berlin&#39;</span>
+
+<span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s">&#39;en&#39;</span>
+</pre></div>
+</div>
+<p>The last thing on the list is to set the path to the templates:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TEMPLATE_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SITE_ROOT</span><span class="p">,</span> <span class="s">&#39;..&#39;</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We will create the directory for the templates later in the root directory
+of the project. Notice how we make use of the <tt class="docutils literal"><span class="pre">SITE_ROOT</span></tt> constant.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is possible to have your templates outside of the project.
+You just would have to reference the path in the <tt class="docutils literal"><span class="pre">TEMPLATE_DIRS</span></tt>
+constant.</p>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.4/topics/settings/#topics-settings">Configuration of Django</a></li>
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.4/ref/settings/#ref-settings">Listing of all possible constants in the settings</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Start a new project</a><ul>
+<li><a class="reference internal" href="#a-folder-for-all-python-projects">A folder for all python projects</a></li>
+<li><a class="reference internal" href="#create-the-django-project">Create the Django Project</a></li>
+<li><a class="reference internal" href="#adjust-the-configuration">Adjust the configuration</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Erste Schritte mit Django</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testserver.html"
+                        title="next chapter">Development Webserver</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/first_steps/start.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="testserver.html" title="Development Webserver"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Erste Schritte mit Django"
+             >previous</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" >Erste Schritte mit Django</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright .
+    <br />Dieses Werk ist unter einem <a href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland Lizenzvertrag</a> lizenziert.<br />
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

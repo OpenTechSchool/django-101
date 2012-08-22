@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Django &mdash; Django 101 Tutorial</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Django 101 Tutorial" href="../index.html" />
+    <link rel="up" title="Vorbereitung" href="index.html" />
+    <link rel="next" title="Erste Schritte mit Django" href="../erste_schritte/index.html" />
+    <link rel="prev" title="Virtualenv" href="virtualenv.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Allgemeiner Index"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../erste_schritte/index.html" title="Erste Schritte mit Django"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="virtualenv.html" title="Virtualenv"
+             accesskey="P">zurück</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Vorbereitung</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="django">
+<h1>Django<a class="headerlink" href="#django" title="Permalink zu dieser Überschrift">¶</a></h1>
+<div class="section" id="ein-neues-virtual-environment-fur-das-projekt-anlegen">
+<h2>Ein neues <em>virtual environment</em> für das Projekt anlegen<a class="headerlink" href="#ein-neues-virtual-environment-fur-das-projekt-anlegen" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p>Nachdem nun Python und <strong class="program">virtualenv</strong> installiert sind kann ein neues
+<em>virtual environment</em> für Django angelegt werden:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkvirtualenv --distribute django-workshop
+</pre></div>
+</div>
+<p>Falls kein <strong class="program">virtualenvwrapper</strong> installiert wurde muss folgendes
+Kommando ausgeführt werden:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>virtualenv --distribute .virtualenvs/django-workshop
+</pre></div>
+</div>
+<p>Folgendes passiert:</p>
+<ul class="simple">
+<li>Die Option <tt class="docutils literal"><span class="pre">--distribute</span></tt> installiert im <em>virtual environment</em>
+<tt class="docutils literal"><span class="pre">distribute</span></tt> statt <tt class="docutils literal"><span class="pre">setuptools</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django-workshop</span></tt> ist der Name, unter dem das <em>virtual environment</em>
+später zur Verfügung steht</li>
+</ul>
+<p>Falls der <strong class="program">virtualenvwrapper</strong> benutzt wurde ist das <em>virtual
+environment</em> jetzt schon aktiviert.</p>
+<p>Andernfalls muss es manuell aktiviert werden:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> .virtualenvs/django-workshop
+<span class="nv">$ </span>. bin/activate
+</pre></div>
+</div>
+</div>
+<div class="section" id="django-installieren">
+<h2>Django installieren<a class="headerlink" href="#django-installieren" title="Permalink zu dieser Überschrift">¶</a></h2>
+<p>Jetzt installieren wir Django in das aktivierte <em>virtual environment</em>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install django
+</pre></div>
+</div>
+<p>Wenn der <strong class="program">virtualenvwrapper</strong> installiert ist, kann man sich die
+installierten Pakete mit folgendem Kommando anzeigen lassen:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>lssitepackages -l
+</pre></div>
+</div>
+<p>Ohne <strong class="program">virtualenvwrapper</strong> kann man sich die Pakete einfach direkt im
+Verzeichnis ansehen:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ls -l .virtualenvs/django-workshop/lib/python2.6/site-packages/
+</pre></div>
+</div>
+<p>Dort sollte sich jetzt ein Verzeichnis <cite>django</cite> befinden.</p>
+<p>Die Django Version kann man mit folgendem Kommando prüfen:</p>
+<div class="highlight-python"><pre>$ django-admin.py --version
+1.4</pre>
+</div>
+<div class="section" id="unterstutzung-fur-zeitzonen-installieren">
+<h3>Unterstützung für Zeitzonen installieren<a class="headerlink" href="#unterstutzung-fur-zeitzonen-installieren" title="Permalink zu dieser Überschrift">¶</a></h3>
+<p>Ab Django 1.4 existiert eine Unterstützung für <a class="reference external" href="https://docs.djangoproject.com/en/1.4/topics/i18n/timezones/#time-zones">Zeitzonen</a>, die als Voreinstellung aktiviert ist.
+Damit diese korrekt funktioniert, ist es emfehlenswert das Paket <tt class="docutils literal"><span class="pre">pytz</span></tt>
+zusätzlich zu installieren:</p>
+<div class="highlight-python"><pre>$ pip install pytz</pre>
+</div>
+</div>
+</div>
+<div class="section" id="weiterfuhrende-links">
+<h2>Weiterführende Links<a class="headerlink" href="#weiterfuhrende-links" title="Permalink zu dieser Überschrift">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.djangoproject.com/">Django Homepage</a></li>
+<li><a class="reference external" href="http://djangobook.com/en/2.0/">The Django Book</a></li>
+<li><a class="reference external" href="http://www.djangopackages.com/">Django Packages</a> - Ein Verzeichnis für wiederverwendbare Apps</li>
+<li><a class="reference external" href="http://djangosnippets.org/">Django Snippets</a> - Eine Sammlung nützlicher Code Schnipsel</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Django</a><ul>
+<li><a class="reference internal" href="#ein-neues-virtual-environment-fur-das-projekt-anlegen">Ein neues <em>virtual environment</em> für das Projekt anlegen</a></li>
+<li><a class="reference internal" href="#django-installieren">Django installieren</a><ul>
+<li><a class="reference internal" href="#unterstutzung-fur-zeitzonen-installieren">Unterstützung für Zeitzonen installieren</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#weiterfuhrende-links">Weiterführende Links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="virtualenv.html"
+                        title="vorheriges Kapitel">Virtualenv</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="../erste_schritte/index.html"
+                        title="nächstes Kapitel">Erste Schritte mit Django</a></p>
+  <h3>Diese Seite</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/vorbereitung/django.txt"
+           rel="nofollow">Quelltext anzeigen</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Geben Sie Suchbegriffe oder einen Modul-, Klassen- oder Funktionsnamen ein.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Allgemeiner Index"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../erste_schritte/index.html" title="Erste Schritte mit Django"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="virtualenv.html" title="Virtualenv"
+             >zurück</a> |</li>
+        <li><a href="../index.html">Django 101 Tutorial</a> &raquo;</li>
+          <li><a href="index.html" >Vorbereitung</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright .
+    <br />Dieses Werk ist unter einem <a href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland Lizenzvertrag</a> lizenziert.<br />
+      Mit <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3 erstellt.
+    </div>
+  </body>
+</html>
