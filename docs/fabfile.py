@@ -27,6 +27,10 @@ def setup():
 def build(target='html'):
     for language in LANGUAGES:
         build_language(language, target)
+    if 'html' in target:
+        static_files = os.path.join(BASE_DIR, '_static', '*')
+        target_dir = os.path.join(BUILD_DIR, target)
+        local('cp %s %s' % (static_files, target_dir))
         
 
 def build_language(language, target='html'):
