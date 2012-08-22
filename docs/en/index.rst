@@ -16,3 +16,4 @@ Inhaltsverzeichnis:
    :maxdepth: 2
    
    preparation/index
+   first_steps/index

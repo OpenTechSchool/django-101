@@ -1,14 +1,14 @@
-Entwicklungs-Webserver
-**********************
+Development Webserver
+*********************
 
-Nun da Django konfigiriert ist, kannst du dir die ersten Resultate ansehen.
+Now that Django is configured, you can view the first results.
 
-Den Entwicklungs-Webserver starten
-==================================
+Start the development webserver
+===============================
 
-Zunächst starte Djangos Entwicklungs-Webserver:
+You can start Djangos development webserver with the following command:
 
-.. code-block:: bash
+..  code-block:: bash
 
     $ python manage.py runserver
     Validating models...
@@ -18,17 +18,17 @@ Zunächst starte Djangos Entwicklungs-Webserver:
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
-Unter der URL http://127.0.0.1:8000/ kannst du dir die Willkommens-Seite von Django ansehen.
+Open the URL http://127.0.0.1:8000/ in your browser to view Djangos welcome page.
 
-Die erste eigene Seite
-======================
+The first own page
+==================
 
-Um eine einfache Seite anzuzeigen, braucht es nur ein paar wenige Schritte.
+Only a few steps are needed to show simple first page.
 
-Template anlegen
-----------------
+Create a template
+-----------------
 
-Als erstes benötigst du ein Template für deine Website. Erstelle das Verzeichnis :file:`templates` im Projektverzeichnis. Das ist das Verzeichnis :file:`cookbook` mit der Datei :file:`manage.py` darin. Im neuen Verzeichnis erstellst du die Datei :file:`base.html`:
+The first thing you need for your website is a template. Create a folder :file:`templates` in the project directory. (Remember that the directory :file:`cookbook` that contains :file:`manage.py`.) In the new directory you create the file :file:`base.html`:
 
 .. code-block:: html+django
 
@@ -36,27 +36,27 @@ Als erstes benötigst du ein Template für deine Website. Erstelle das Verzeichn
     <html>
     <head>
         <meta charset="utf-8">
-    	<title>Kochbuch</title>
+    	<title>Cookbook</title>
     </head>
     <body>
-        <h1>Kochbuch</h1>
+        <h1>Cookbook</h1>
     </body>
     </html>
 
-URLConf anpassen
-----------------
+Modify URLConf 
+--------------
 
-Die einfachste Art ein Template anzuzeigen, ist der ``TemplateView``. 
+The simplest way to view a template is the ``TemplateView``. 
 
-Öffne die Datei :file:`cookbook/urls.py` und füge nach Zeile 1 folgenden Code ein::
+Open the folder :file:`cookbook/urls.py` and enter the follwing code after line 1::
 
     from django.views.generic.base import TemplateView
 
-Außerdem füge am Ende der ``urlpatterns`` folgende Zeile ein::
+Additionally enter at the end of the ``urlpatterns`` the following line::
 
     url(r'^home/', TemplateView.as_view(template_name='base.html')),
 
-Danach sieht die Datei so aus::
+After your edits the file should look line that::
 
     from django.conf.urls import patterns, include, url
     from django.views.generic.base import TemplateView
@@ -78,29 +78,28 @@ Danach sieht die Datei so aus::
         url(r'^home/', TemplateView.as_view(template_name='base.html'))
     )
 
-Du kannst nun wieder den Entwicklungs-Webserver starten und die neue Seite unter http://127.0.0.1:8000/home/ erreichen.
+Now you can start the development server again and reach the new page under http://127.0.0.1:8000/home/.
 
 
-Die Admin-Applikation aktivieren
-================================
+Activate the Admin-Application 
+==============================
 
-Django bringt eine Admin-Applikation mit, die es dir erlaubt, über ein Web-Interface mit der Datenbank zu interagieren.
+Django has an Admin-Application included, that allows you to interact with the database over a web interface.
 
-Anpassen der Konfiguration
---------------------------
+Ajust the configuration
+-----------------------
 
-Entferne in der Datei :file:`settings.py` in ``INSTALLED_APPS`` das
-Kommentarzeichen vor der Zeile ``'django.contrib.admin',``, um die
-Admin-Applikation zu aktivieren.
+Open the file :file:`settings.py` and find the section ``INSTALLED_APPS``.
+Remove the comment sign in the line that contains ``'django.contrib.admin',``,
+to activate the Admin-Application.
 
-URLConf anpassen
-----------------
+Adjust URLConf
+--------------
 
-Damit die Admin-Applikation auch im Browser aufgerufen werden kann müssen wir
-die URL des Admins ebenfalls aktivieren.
-
-Öffne dazu die Datei :file:`cookbook/urls.py` und entferne die
-Kommentarzeichen in den Zeilen 5, 6 und 17. Danach sieht die Datei so aus::
+To make the Admin-Application ready to be openend in the browser, we have
+to activate the URL of it. Open :file:`cookbook/urls.py` and remove the
+comment signs in lines 5, 6 and 17. After that the file should look like
+that::
 
     from django.conf.urls import patterns, include, url
     from django.views.generic.base import TemplateView
@@ -122,12 +121,10 @@ Kommentarzeichen in den Zeilen 5, 6 und 17. Danach sieht die Datei so aus::
         url(r'^home/', TemplateView.as_view(template_name='base.html'))
     )
 
-Datenbank synchronisieren
--------------------------
+Synchronise the database
+------------------------
 
-Django bringt bereits eine App zur Authentifizierung mit. Um die Datenbank entsprechend einzurichten, führe folgendes Kommando aus
-
-.. code-block:: bash
+Django already includes an App to do the authentication. To configure the database accordingly, execute the following command::
 
     $ python manage.py syncdb
     Creating tables ...
@@ -155,24 +152,12 @@ Django bringt bereits eine App zur Authentifizierung mit. Um die Datenbank entsp
 
 ..  note::
 
-    Weil die in Django enthaltene App zur Authentifizierung zum ersten mal
-    installiert wird, wird auch ein neuer Superuser angelegt.
+    In the process of installing Djangos authentication app the first time a new admin/superuser is be created.
 
-Starte nun erneut den Entwicklungs-Webserver.
-
-.. code-block:: bash
-
-    $ python manage.py runserver
-    Validating models...
-
-    0 errors found
-    Django version 1.4, using settings 'cookbook.settings'
-    Development server is running at http://127.0.0.1:8000/
-    Quit the server with CONTROL-C.
-
-Die Admin-Applikation kann unter http://127.0.0.1:8000/admin/ erreicht werden. Die Zugangsdaten entsprechen denen des eben angelegten Superusers.
+The admin application has the URL http://127.0.0.1:8000/admin/. The credentials are the ones of the superuser you just
+created.
 
 Weiterführende Links zur Django Dokumentation
 =============================================
 
-* :djangodocs:`Informationen zur Admin-Applikation <ref/contrib/admin/#ref-contrib-admin>`
+* :djangodocs:`Informationen about the Admin-Application <ref/contrib/admin/#ref-contrib-admin>`

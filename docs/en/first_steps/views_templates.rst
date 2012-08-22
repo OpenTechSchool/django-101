@@ -152,7 +152,7 @@ When opening http://127.0.0.1:8000/ you will see a ``TemplateDoesNotExist`` exce
 Create the list template
 ========================
 
-Open the file :file:`base.html` from the :fiel:`templates` folder and change it this way:
+Open the file :file:`base.html` from the :file:`templates` folder and change it this way:
 
 .. code-block:: html+django
 

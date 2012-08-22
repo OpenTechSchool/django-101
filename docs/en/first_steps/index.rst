@@ -8,6 +8,6 @@ Erste Schritte mit Django
    testserver
    app
    admin
-   datenbank
+   database
    views_templates
-   rueckblick_ausblick
+   summary 

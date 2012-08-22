@@ -64,7 +64,7 @@ There is a bootstrap script to ease installation:
 pip
 ---
 
-The package installation is done by :program:`pip`, a replacement for :program:`easy_install` which brings `more features`<http://www.pip-installer.org/en/latest/index.html#pip-compared-to-easy-install>`_. However :program:`pip` itself has to be installed with :program:`easy_install`:
+The package installation is done by :program:`pip`, a replacement for :program:`easy_install` which brings `more features <http://www.pip-installer.org/en/latest/index.html#pip-compared-to-easy-install>`_. However :program:`pip` itself has to be installed with :program:`easy_install`:
 
 .. code-block:: bash
 

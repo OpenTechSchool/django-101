@@ -10,7 +10,6 @@ Lets create a folder for this and future projects:
 
     $ mkdir pythonprojects
 
-
 Create the Django Project
 =========================
 
