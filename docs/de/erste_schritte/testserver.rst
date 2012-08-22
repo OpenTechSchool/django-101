@@ -170,7 +170,7 @@ Starte nun erneut den Entwicklungs-Webserver.
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
-Die Admin-Applikation kann unter http://127.0.0.1:8000/admin/ erreicht werden. Die Zugangsdaten entsprechen denen des eben angeleten Superusers.
+Die Admin-Applikation kann unter http://127.0.0.1:8000/admin/ erreicht werden. Die Zugangsdaten entsprechen denen des eben angelegten Superusers.
 
 Weiterführende Links zur Django Dokumentation
 =============================================
