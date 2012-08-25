@@ -12,7 +12,7 @@ you will get to know following aspects of Django:
 - Views
 - Templates
 
-Inhaltsverzeichnis:
+Table of contents:
 
 .. toctree::
    :maxdepth: 2
