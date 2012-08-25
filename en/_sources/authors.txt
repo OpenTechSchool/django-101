@@ -6,7 +6,7 @@ Autoren
 Django 101 Tutorial
 ===================
 
-Anpassung und Übersetzung:
+Adaption and translation:
 
 - Stephan Klinger
 - Andreas Hug
@@ -29,10 +29,10 @@ die Integration von Mercurial. Seit 2011 ist er Geschäftsführer der
 .. _Markus Zapke-Gründemann: http://www.keimlink.de/
 .. _Inqbus GmbH & Co. KG: http://www.inqbus.de/
 
-Weitere Autoren
----------------
+More authors
+------------
 
-Vielen Dank für die Unterstützung des Projekts an:
+Thanks for helping this project:
 
 - Max Brauer
 - Maik Derstappen
