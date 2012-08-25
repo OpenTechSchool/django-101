@@ -3,6 +3,16 @@
 Autoren
 *******
 
+Django 101 Tutorial
+===================
+
+Anpassung und Übersetzung:
+
+- Stephan Klinger
+- Andreas Hug
+- Jannis Leidel
+- Tim Weiss
+
 Django-Workshop
 ===============
 
