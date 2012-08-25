@@ -1,7 +1,9 @@
 Django 101
 **********
 
-The *Django 101* tutorial is an adaption of http://www.django-workshop.de for the OpenTechSchool PyCoaches workshops. While creating a cookbook application, you will get to know following aspects of Django:
+The *Django 101* tutorial is an adaption of http://www.django-workshop.de for
+the OpenTechSchool_ PyCoaches_ workshops. While creating a cookbook application,
+you will get to know following aspects of Django:
 
 - Django setup/configuration
 - Models and object-relational mapping
@@ -17,3 +19,9 @@ Inhaltsverzeichnis:
    
    preparation/index
    first_steps/index
+   authors
+   license
+
+
+.. _OpenTechSchool: http://www.opentechschool.org
+.. _PyCoaches: http://python.opentechschool.org
